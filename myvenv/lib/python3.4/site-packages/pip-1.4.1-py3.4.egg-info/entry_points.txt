@@ -1,0 +1,4 @@
+[console_scripts]
+pip-3.4 = pip:main
+pip = pip:main
+
