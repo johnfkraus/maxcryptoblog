@@ -78,3 +78,25 @@ run `python manage.py runserver`
 browse to  http://127.0.0.1:8000/admin/
 
 
+add .giritnore
+```
+*.pyc
+__pycache__
+myvenv
+db.sqlite3
+/static
+.DS_Store
+```
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+
+
+git rm --cached -r .
+git add .
+
