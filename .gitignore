@@ -8,3 +8,4 @@ local_settings.py
 notes.secret.txt
 *.hide.txt
 *.secret.txt
+diffsettings*
