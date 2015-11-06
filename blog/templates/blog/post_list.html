@@ -1,27 +1,15 @@
-<html>
-<head>
-    <title>Cryptoblog</title>
-</head>
-<body>
-    <div>
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="post">
+    <p>
+        published: {{ post.published_date }}
+    </p>
+    <h1><a href="{% url 'post_detail' pk=post.pk %}" target="_blank">{{ post.title }}</a></h1>
 
-        <h1><a href="">Cryptoblog</a></h1>
-    </div>
-
-
-    {% for post in posts %}
-    <div>
-        <p>
-            published: {{ post.published_date }}
-        </p>
-        <h1><a href="" target="_blank">{{ post.title }}</a></h1>
-
-        <p>
-            {{ post.text|linebreaks }}
-        </p>
-    </div>
-    {% endfor %}
-
-
-</body>
-</html>
+    <p>
+        {{ post.text|linebreaks }}
+    </p>
+</div>
+{% endfor %}
+{% endblock content %}
