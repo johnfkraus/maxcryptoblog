@@ -1,6 +1,6 @@
 # cryptoblog
 
-as of Nov 4, 2015, deployed here: http://johnfkraus.pythonanywhere.com/admin/blog/post/
+as of Nov 6, 2015, deployed here: http://johnfkraus.pythonanywhere.com
 
 
   860  yum remove rh-python34
@@ -16,7 +16,7 @@ as of Nov 4, 2015, deployed here: http://johnfkraus.pythonanywhere.com/admin/blo
 
   960  pip install django==1.8
   961  python manage.py migrate
-  962  python manage.py runserver 
+  962  python manage.py runserver
 
   999  cd cryptoblog/
  1001  echo "# cryptoblog" >> README.md
@@ -28,8 +28,8 @@ as of Nov 4, 2015, deployed here: http://johnfkraus.pythonanywhere.com/admin/blo
  1008  git add .
  1009  git commit -m 'startproject, migrate'
  1010  git push
- 1012  cat README.md 
- 1013  history >> README.md 
+ 1012  cat README.md
+ 1013  history >> README.md
 
 Change time zone.
 in mysite/settings.py after
@@ -61,7 +61,7 @@ admin.site.register(Post)
 ```
     (myvenv) ~/djangogirls$ python manage.py createsuperuser
 
-run `python manage.py runserver` 
+run `python manage.py runserver`
 browse to  http://127.0.0.1:8000/admin/
 
 add .giritnore
@@ -168,7 +168,7 @@ And remember, your coach is here to help!
 
 # You are live!
 
-The default page for your site should say "Welcome to Django", just like it does on your local computer. Try adding `/admin/` to the end of the URL, and you'll be taken to the admin site. 
+The default page for your site should say "Welcome to Django", just like it does on your local computer. Try adding `/admin/` to the end of the URL, and you'll be taken to the admin site.
 
 
 
