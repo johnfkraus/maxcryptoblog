@@ -6,3 +6,5 @@ db.sqlite3
 .DS_Store
 local_settings.py
 notes.secret.txt
+*.hide.txt
+*.secret.txt
