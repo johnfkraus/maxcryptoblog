@@ -9,3 +9,4 @@ notes.secret.txt
 *.hide.txt
 *.secret.txt
 diffsettings*
+postgres-cheatsheet.md
