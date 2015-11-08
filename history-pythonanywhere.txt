@@ -1,21 +1,4 @@
-    1  dir
-    2  ll
     3  cd djangogirls/
-    4  ll
-    5  dir
-    6  cd ..
-    7  ll
-    8  ls
-    9  ls -l
-   10  cd myvenv/
-   11  ll
-   12  dir
-   13  tree
-   14  ls -l
-   15  cd djangogirls/
-   16  ll
-   17  dir
-   18  ls -l
    19  source myvenv/bin/activate
    20  git pull
    21  git stash 
@@ -24,17 +7,9 @@
    24  git stash
    25  git pull
    26  python manage.py collectstatic
-   27  git pull
-   28  python manage.py collectstatic
-   29  ls -l
    30  ./versions.sh 
    31  ./enable_python33.sh 
-   32  exit
-   33  ll
-   34  ls
    35  cd djangogirls/
-   36  ll
-   37  ls -l
    38  pip install requirements.txt 
    39  cat requirements.txt 
    40  ./versions.sh 
@@ -59,114 +34,60 @@
    59  ll
    60  source myvenv/bin/activate
    61  pip install django whitenoise
-   62  git add -all .
    63  git add --all .
    64  history 
    65  history > hist.txt
    66  vim hist.txt 
    67  git pull
-   68  ll
-   69  rm -rf terminal.txt 
-   70  rm -rf README.md*
-   71  ll
    72  git pull
    73  git stash
    74  git pull
-   75  ll
-   76  tree
-   77  tree | less
-   78  ll
-   79  cd ..
-   80  ll
    81  rm -rf djangogirls/
-   82  ll
    83  cat README.txt 
    84  history | grep clone
    85  git clone https://github.com/johnfkraus/djangogirls.git
    86  cd djangogirls/
-   87  ll
    88  virtualenv --python=python3.4 myvenv
    89  source myenv/bin/activate
-   90  ll
-   91  exit
-   92  dir
-   93  ll
    94  cd djangogirls/
-   95  ll
    96  source myvenv/bin/activate
    97  ./versions.sh 
-   98  ll
-   99  exit
-  100  ll
-  101  cd djangogirls/
-  102  ll
   103  rm -rf myvenv/
   104  virtualenv --python=python3.4 myvenv
   105  source myvenv/bin/activate
   106  pip install django whitenoise
-  107  history
   108  history > history_pythonanywhere.txt
   109  vim history_pythonanywhere.txt 
   110  git pull
-  111  ll
   112  ./versions.sh 
   113  python manage.py collectstatic
   114  ./versions.sh 
   115  git pull
-  116  ll
   117  cat start_virtual_env.sh
   118  cat requirements.txt 
   119  pip freeze > req.txt
   120  cat req.txt 
   121  ./versions.sh 
-  122  ll
-  123  cd ..
-  124  ll
   125  cat README.txt 
   126  cd myvenv/
-  127  ll
-  128  cd bin/
-  129  ll
-  130  cd ..
-  131  ll
   132  rm -rf myvenv/
   133  rm -rf djangogirls/
-  134  ll
-  135  exit
-  136  ll
   137  cd djangogirls/
-  138  ll
   139  dir
   140  git pull
   141  git status
-  142  ll
   143  cat requirements.txt 
-  144  pwd
-  145  ll
   146  cd cryptoblog/
   147  git pull
   148  vim mysite/settings.py 
-  149  ll
   150  cat requirements.txt 
   151  pip install requirements.txt 
   152  vim requirements.txt 
-  153  ll
   154  rm requirements.txt 
   155  git pull
   156  cd mysite/
-  157  dir
   158  vim settings.py 
   159  git pull
-  160  dir
-  161  cd ..
-  162  ll
-  163  cd mysite/
-  164  ll
-  165  vim settings.py 
-  166  git pull
-  167  ll
-  168  cd ..
-  169  ll
   170  source myvenv/
   171  source myvenv/bin/activate
   172  git pull
