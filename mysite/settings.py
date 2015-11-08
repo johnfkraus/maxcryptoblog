@@ -120,6 +120,6 @@ ALLOWED_HOSTS = ['*']
 DEBUG = False
 
 try:
-    from .local_settings import *
+    from .pythonanywhere_settings import *
 except ImportError:
     pass
