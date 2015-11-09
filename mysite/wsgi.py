@@ -15,5 +15,9 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 application = get_wsgi_application()
 
+"""
+heroku stuff here:
+
 from whitenoise.django import DjangoWhiteNoise
 application = DjangoWhiteNoise(application)
+"""

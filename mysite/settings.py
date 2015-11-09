@@ -122,6 +122,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'
 
+"""
+# This is heroku stuff:
+
 # import dj_database_url
 # DATABASES['default'] = dj_database_url.config()
 
@@ -130,6 +133,12 @@ LOGIN_REDIRECT_URL = '/'
 ALLOWED_HOSTS = ['*']
 
 try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+try:
     from .pythonanywhere_settings import *
 except ImportError:
     pass
+"""
