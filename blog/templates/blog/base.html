@@ -16,19 +16,28 @@
  <div id="k-content">
 
     <div  class="page-header">
-                    <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
+        <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
 
         {%  if  user.is_authenticated   %}
         <!--  user is authenticated!  -->
-            <a  href="{%    url "post_new"  %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-
-            <a href="{% url "post_draft_list" %}" class="top-menu">
-                <span  class="glyphicon    glyphicon-edit"></span>
+            <a href="{% url "post_new"%}" class="top-menu">
+                <span class="glyphicon glyphicon-plus"></span>
             </a>
 
-            <p class="top-menu">Hello  {{  user.username   }}<small><a    href="{%    url "django.contrib.auth.views.logout"  %}">&nbsp;(Log out)</a></small></p>
+            <a href="{% url "post_draft_list" %}" class="top-menu">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+
+            <p class="top-menu">
+                Hello {{ user.username }}<small><a href="{% url "django.contrib.auth.views.logout" %}">&nbsp;(Log out)</a></small>
+            </p>
         {% else %}
-            <a  href="{%    url "django.contrib.auth.views.login"   %}" class="top-menu"><span  class="glyphicon glyphicon-lock"></span></a>
+            <a  href="{% url "django.contrib.auth.views.login" %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+        
+            <p class="top-menu">
+                Hello Guest
+            </p>
+
         {% endif %}
 
 
@@ -40,6 +49,7 @@
                 <a  href="{%  url "blog.views.post_list"  %}"> 
                     Cryptoblog
                 </a>
+                <span class="devstage">alpha</span>
             </h1>
         </div>
 </div>
