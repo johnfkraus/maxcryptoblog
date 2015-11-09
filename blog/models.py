@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.template.defaultfilters import truncatechars  # or truncatewords
 import blog.encryption
 
 
@@ -64,6 +65,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    def short_text(self):
+        return truncatechars(self.text, 100)
 
 
 class Question(models.Model):

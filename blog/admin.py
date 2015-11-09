@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from .models import Post, Comment, Question, Choice
 
-admin.site.register(Comment)
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -24,5 +23,11 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['published_date', 'author']
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('short_text', 'author', 'post')
+    list_filter = ['approved_comment', 'author', 'created_date']
+
+
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)

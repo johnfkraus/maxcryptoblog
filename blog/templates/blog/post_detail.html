@@ -82,7 +82,7 @@
             {% endif %}
 
         </div>
-        <strong>{{ comment.author }}</strong>
+        <div>comment author: {{ comment.author }}</div>
         <p>{{ comment.text|linebreaks }}</p>
     </div>
     {% empty %}
