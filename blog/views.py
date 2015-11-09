@@ -19,8 +19,8 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
-def help(request):
-    return render(request, 'blog/help.html')
+def about(request):
+    return render(request, 'blog/about.html')
 
 
 def post_detail(request, pk):
