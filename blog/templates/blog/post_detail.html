@@ -1,44 +1,92 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
 
 {% block content %}
-    <div class="post">
-        {% if post.published_date %}
+
+<div class="post">
+    {% if post.published_date %}
+        <div class="date">
             published: {{ post.published_date }}
-        {% else %}
+        </div>
+        <p class="author">
+                author: {{ post.author }}
+        </p>
+        {% ifequal user.username post.author.username %}
+        <a class="btn btn-default" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
+        {% endifequal %}
+    {% else %}
+        <div class="date">
+           created: {{ post.created_date }}
+        </div>
+        <p class="author">
+                author: {{ post.author }}
+        </p>
+        {% ifequal user.username post.author.username %}
             <a class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
-        {% endif %}
+        {% endifequal %}
+    {% endif %}
 
+    {% if user.is_authenticated  %}
+        {% ifequal user.username post.author.username %}
 
-                <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% if not post.is_encrypted %}
+                <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            {% endif %}
+ 
 
+        {% endifequal %}
 
+        {% ifequal user.username post.author.username %}
+        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        {% endifequal %}
+    {% else %}
+        <a href="{% url "django.contrib.auth.views.login" %}" class="top-menu">
+            <span  class="glyphicon glyphicon-lock">
+        </a>
+    {% endif %}
 
-        <h1>{{ post.title }}</h1>
+    {% ifequal user.username post.author.username %}
+    {% if not post.is_encrypted %}
+        <a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}"><span class="glyphicon glyphicon-lock"></span></a>
+        {% else %}
+
+        <a class="btn btn-default" href="{% url 'post_decrypt' pk=post.pk %}"><span class="glyphicon glyphicon-question-sign"></span></a>
+    {% endif %} 
+       {% endifequal %}
+
+    <h1>{{ post.title }}</h1>
+
+        {% if not post.is_encrypted %}
+        <h4>Plaintext:</h4>
         <p>{{ post.text|linebreaks }}</p>
+        {% else %}
+        <h4>Ciphertext:</h4>
+        <p>{{ post.ciphertext|linebreaks }}</p>
+        {% endif %}
     </div>
+    <hr>
+    <a  class="btn btn-default" href="{% url "add_comment_to_post" pk=post.pk %}">Add comment</a>
 
-
-<hr>
-
-<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
-
-{% for comment in post.comments.all %}
-    {% if user.is_authenticated or comment.approved_comment %}
+    {% for comment in post.comments.all %}
     <div class="comment">
         <div class="date">
             {{ comment.created_date }}
+
             {% if not comment.approved_comment %}
-                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            <a class="btn btn-default" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
+            <a class="btn btn-default" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
             {% endif %}
+
         </div>
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.text|linebreaks }}</p>
     </div>
-    {% endif %}
-{% empty %}
-    <p>No comments here yet :(</p>
-{% endfor %}
+    {% empty %}
+    <p class="k-nocomment">No comments here yet :-(</p>
+    {% endfor %}
 
 {% endblock %}

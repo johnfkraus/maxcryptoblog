@@ -1,21 +1,35 @@
-{% extends 'blog/base.html' %}
+<!-- hello from crypto-blog/blog/templates/blog/post_list.html  -->
+{% extends "blog/base.html" %}
 {% block content %}
+<h1>Published Posts ({{ posts|length }})</h1>
 {% for post in posts %}
 <div class="post">
-    <h1>
-        <a href="{% url 'post_detail' pk=post.pk %}" target="_blank">{{ post.title }}</a>
-    </h1>
-    <p>
-        published: {{ post.published_date }}
-    </p>
-
-    <p>
-        {{ post.text|linebreaks }}
-    </p>
-
-        <a href="{% url 'blog.views.post_detail' pk=post.pk %}">
-            Comments: {{ post.approved_comments.count }}
+    <div class="date">
+        <p>published: {{ post.published_date }}</p>
+    </div>
+       <p class="author">
+                author: {{ post.author }}
+        </p>
+    <h2>
+        <a href="{% url "post_detail" pk=post.pk %}">
+            {{ post.title }}
         </a>
+    </h2>
+
+        {% if post.is_encrypted %}
+        <h4>Ciphertext:</h4>
+        <p class="k-post-text k-cipher">
+            {{ post.ciphertext|truncatechars_html:350 }}
+        </p>
+        {% else %}
+        <h4>Plaintext:</h4>
+        <p class="k-post-text k-plain">
+            {{ post.text|truncatechars_html:150 }}</p>
+        {% endif %}
+
+    <a href="{% url "blog.views.post_detail" pk=post.pk %}">    Comments: {{ post.comments.count }}
+    </a>
+
 </div>
 {% endfor %}
 {% endblock content %}

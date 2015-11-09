@@ -1,0 +1,71 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <div class="help">
+        <h1>About</h1>
+        <h3>
+        Features
+        </h3>
+        <p>
+            Crypto-Blog is a web application for blogging.
+            Crypto-Blog was created using the Python Django web application framework.
+        </p>
+        <p>
+            Anyone can read any published blog posts.
+            To create blog posts, you must sign in with a username and password, which you may request by <a href="mailto:johnkraus3@gmail.com" target="_blank">email from the site administrator.</a>
+        </p>
+        <p>
+            Only you can read or edit your draft (unpublished) blog posts.
+        </p>
+        <p>
+            You can encrypt and decrypt your blog posts using a password.
+        </p>
+<!--   
+Topics suitable for encryption might include:
+What happened in Vegas.
+Your manifesto.
+
+
+-->
+
+
+
+        <h3>
+        Planned features
+        </h3>
+        <p>
+            You can allow other authenticated users to read your encrypted posts if you give them the password.
+        </p>
+        <h3>
+        Cryptograpy
+        </h3>
+        <p>
+            Crypto-blog uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using it cannot be manipulated or read without the key.
+        </p>
+        <p>
+            The Fernet implementation is built on top of the following standard cryptographic primitives:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    AES in CBC mode with a 128-bit key for encryption; using PKCS7 padding.
+                </li>
+                <li>
+                    HMAC using SHA256 for authentication.
+                </li>
+                <li>
+                    Initialization vectors are generated using os.urandom().
+                </li>
+            </ul>
+        </p>
+        <h3 style="color: red;">Caution</h3>
+        <p>
+            This web application is in the early stages of development and is virtually untested.  Long-term maintenance of user content or accounts is impossible at this time.  The security of any information stored on Crypto-Blog is currently dubious.  Enjoy!
+        </p>
+
+        <hr>
+        <p>
+            This is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
+        </p>
+        <hr>
+    </div>
+{% endblock %}

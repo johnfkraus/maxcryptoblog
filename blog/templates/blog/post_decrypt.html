@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <h1>Decrypt post</h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+        {{ form }}
+        <button type="submit" class="save btn btn-default">Decrypt</button>
+    <br />
+    </form>
+            <h1>{{ post.title }}</h1>
+            <!--
+            <h3>Plaintext:</h3>
+        <p>{{ post.text|linebreaks }}</p>
+    -->
+
+
+        <h3>Ciphertext:</h3>
+        <p>{{ post.ciphertext|linebreaks }}</p>
+{% endblock %}
