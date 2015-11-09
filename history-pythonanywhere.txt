@@ -1,0 +1,99 @@
+    3  cd djangogirls/
+   19  source myvenv/bin/activate
+   20  git pull
+   21  git stash 
+   22  git config --global user.email "johnkraus3@gmail.com"
+   23  git config --global user.name "johnfkraus"
+   24  git stash
+   25  git pull
+   26  python manage.py collectstatic
+   30  ./versions.sh 
+   31  ./enable_python33.sh 
+   35  cd djangogirls/
+   38  pip install requirements.txt 
+   39  cat requirements.txt 
+   40  ./versions.sh 
+   41  cat enable_python33.sh 
+   42  scl
+   43  yum install scl
+   44  ll
+   45  ls
+   46  source myvenv/bin/activate
+   47  ./versions.sh 
+   48  ls
+   49  cd ..
+   50  ll
+   51  ls
+   52  ls -la
+   53  vi .bashrc
+   54  . ./.bashrc
+   55  ll
+   56  cd djangogirls/
+   57  ll
+   58  virtualenv --python=python3.4 myvenv
+   59  ll
+   60  source myvenv/bin/activate
+   61  pip install django whitenoise
+   63  git add --all .
+   64  history 
+   65  history > hist.txt
+   66  vim hist.txt 
+   67  git pull
+   72  git pull
+   73  git stash
+   74  git pull
+   81  rm -rf djangogirls/
+   83  cat README.txt 
+   84  history | grep clone
+   85  git clone https://github.com/johnfkraus/djangogirls.git
+   86  cd djangogirls/
+   88  virtualenv --python=python3.4 myvenv
+   89  source myenv/bin/activate
+   94  cd djangogirls/
+   96  source myvenv/bin/activate
+   97  ./versions.sh 
+  103  rm -rf myvenv/
+  104  virtualenv --python=python3.4 myvenv
+  105  source myvenv/bin/activate
+  106  pip install django whitenoise
+  108  history > history_pythonanywhere.txt
+  109  vim history_pythonanywhere.txt 
+  110  git pull
+  112  ./versions.sh 
+  113  python manage.py collectstatic
+  114  ./versions.sh 
+  115  git pull
+  117  cat start_virtual_env.sh
+  118  cat requirements.txt 
+  119  pip freeze > req.txt
+  120  cat req.txt 
+  121  ./versions.sh 
+  125  cat README.txt 
+  126  cd myvenv/
+  132  rm -rf myvenv/
+  133  rm -rf djangogirls/
+  137  cd djangogirls/
+  139  dir
+  140  git pull
+  141  git status
+  143  cat requirements.txt 
+  146  cd cryptoblog/
+  147  git pull
+  148  vim mysite/settings.py 
+  150  cat requirements.txt 
+  151  pip install requirements.txt 
+  152  vim requirements.txt 
+  154  rm requirements.txt 
+  155  git pull
+  156  cd mysite/
+  158  vim settings.py 
+  159  git pull
+  170  source myvenv/
+  171  source myvenv/bin/activate
+  172  git pull
+  173  git add .
+  174  git commit -m 'local'
+  175  git pull
+  176  history
+  177  history | less
+  178  history > history.txt

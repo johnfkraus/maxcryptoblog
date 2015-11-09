@@ -130,6 +130,6 @@ LOGIN_REDIRECT_URL = '/'
 ALLOWED_HOSTS = ['*']
 
 try:
-    from .local_settings import *
+    from .pythonanywhere_settings import *
 except ImportError:
     pass
