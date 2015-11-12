@@ -90,6 +90,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# pythonanywhere says STATICFILES_DIRS should not contain the STATIC_ROOT setting
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "blog/static"),
+)
 
 # Authentication
 
@@ -136,10 +142,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-
 SITE_ID = 1
 AUTH_USER_MODEL = 'allauthdemo_auth.DemoUser'
 LOGIN_REDIRECT_URL = '/member/'
@@ -152,11 +154,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 SOCIALACCOUNT_AUTO_SIGNUP = False  # require social accounts to use the signup form ... I think
 # For custom sign-up form:
 # http://stackoverflow.com/questions/12303478/how-to-customize-user-profile-when-using-django-allauth
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "blog/static"),
-    '/var/www/static/',
-)
+
 
 print('BASE_DIR = ', BASE_DIR)
 print('STATICFILES_DIRS = ', STATICFILES_DIRS)
