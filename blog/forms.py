@@ -1,5 +1,5 @@
 from django import forms
-
+from django.utils.translation import ugettext_lazy as _
 from .models import Post, Comment
 
 
@@ -18,7 +18,11 @@ class CommentForm(forms.ModelForm):
 class EncryptForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('password',)
+        # save_password = forms.BooleanField(label="Save password? (not recommended)")
+        fields = ('password', 'save_password')
+        labels = {
+            'save_password': _('Save password? (not recommended)'),
+        }
         widgets = {'text': forms.HiddenInput()}
 
 

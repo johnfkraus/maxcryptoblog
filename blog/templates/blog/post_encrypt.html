@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <h1>Encrypt post</h1>
+    <h2>Encrypt post</h2>
    <form method="POST" class="encrypt-form">{% csrf_token %}
         {{ form }}
         <button type="submit" class="save btn btn-default">Encrypt</button>
@@ -9,7 +9,7 @@
     </form>
 
     
-    <h1>{{ post.title }}</h1>
+    <h2>{{ post.title }}</h2>
 
      <h3>Plaintext:</h3>
     <p>{{ post.text|linebreaks }}</p>

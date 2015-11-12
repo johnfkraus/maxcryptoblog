@@ -2,29 +2,31 @@ html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
 
-
-
 .page-header {
-    background-color: #ff9400;
+    /* background-color: #ff9400;  */
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 36pt;
     text-decoration: none;
 }
 
 
 .page-footer {
-    background-color: #ff9400;
+   /* background-color: #ff9400;  */
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
     margin-top: 10px;
     padding: 20px 20px 20px 40px;
 }
 
 .page-footer h1, .page-footer h1 a, .page-footer h1 a:visited, .page-footer h1 a:active {
-    color: #ffffff;
+    /* color: #ffffff;  */
     font-size: 36pt;
     text-decoration: none;
 }
@@ -43,9 +45,18 @@ body > #k-container { height: auto; min-height: 100%; }
 }
 
 #k-content { padding-bottom: 3em; }
-
-h1, h2, h3, h4 {
+/*
+h2, h3, h4, h5 {
     font-family: 'Lobster', cursive;
+}
+
+h1 {
+    font-family: 'zian';
+}
+*/
+.app_title {
+    font-family: 'zian';
+    color: #428BCA !important;
 }
 
 .date {
@@ -74,7 +85,7 @@ h1, h2, h3, h4 {
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
+    /* color: #ffffff; */
     float: right;
     font-size: 16pt;
     margin-right: 20px;

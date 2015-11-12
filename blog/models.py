@@ -3,10 +3,13 @@ from django.db import models
 from django.utils import timezone
 from django.template.defaultfilters import truncatechars  # or truncatewords
 import blog.encryption
+# from django.contrib.auth import get_user_model as user_model
+# User = user_model()
 
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('allauthdemo_auth.DemoUser')
+    # author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()
     ciphertext = models.TextField(blank=True, null=True)
@@ -14,6 +17,7 @@ class Post(models.Model):
     last_update_date = models.DateTimeField(blank=True, null=True)
     published_date = models.DateTimeField(blank=True, null=True)
     password = models.CharField(null=True, max_length=45)
+    save_password = models.BooleanField(default=True)  # label="Save password? /(not recommended/)")
 
     def publish(self):
         self.published_date = timezone.now()
@@ -36,10 +40,14 @@ class Post(models.Model):
     def encrypt(self):
         self.ciphertext = blog.encryption.encrypt(self.password, self.text)
         self.text = 'None'
+        if self.save_password is False:
+            self.password = None
 
     def decrypt(self):
         self.text = blog.encryption.decrypt(self.password, self.ciphertext)
         self.ciphertext = 'None'
+        if self.save_password is False:
+            self.password = None
 
     def __str__(self):
         return self.title
@@ -53,7 +61,9 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
-    author = models.ForeignKey('auth.User', related_name="users")
+    # author = models.ForeignKey('auth.User', related_name="users")
+    author = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="users")
+
     # author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)

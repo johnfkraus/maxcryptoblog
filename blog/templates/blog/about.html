@@ -1,16 +1,16 @@
 {% extends "blog/base.html" %}
 {% block content %}
     <div class="help">
-        <h1>About Cryptoblog</h1>
+        <h2>About {{ APP_TITLE }}</h2>
         <h3>
         Features
         </h3>
         <p>
-            Cryptoblog is a web application for blogging.
-            Cryptoblog was created using the Python Django web application framework.
+            {{ APP_TITLE }} is a web application for blogging.
+            {{ APP_TITLE}} was created using the Python Django web application framework.
         </p>
         <p>
-            Anyone can read any published blog posts.
+            Anyone can read any published blog posts on {{ APP_TITLE }} .
             To create blog posts, you must sign in with a username and password, which you may request by <a href="mailto:johnkraus3@gmail.com" target="_blank">email from the site administrator.</a>
         </p>
         <p>
@@ -23,23 +23,21 @@
 Topics suitable for encryption might include:
 What happened in Vegas.
 Your manifesto.
-
-
 -->
-
-
-
         <h3>
         Planned features
         </h3>
         <p>
             You can allow other authenticated users to read your encrypted posts if you give them the password.
         </p>
+       <p>
+            You can email your encrypted posts.
+        </p>
         <h3>
         Cryptograpy
         </h3>
         <p>
-            Cryptoblog uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using it cannot be manipulated or read without the key.
+            {{ APP_TITLE}} uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using it cannot be manipulated or read without the key.
         </p>
         <p>
             The Fernet implementation is built on top of the following standard cryptographic primitives:
@@ -59,11 +57,11 @@ Your manifesto.
         </p>
         <h3 style="color: red;">Caution</h3>
         <p>
-            This web application is in the early (alpha) stage of development and is virtually untested.  Long-term maintenance of user content or accounts is impossible at this time.  The security of any information stored on Cryptoblog is currently dubious.  Enjoy!
+            This instance of {{ APP_TITLE}} is in the early (alpha) stage of development and is virtually untested.  Long-term maintenance of user content or accounts is impossible at this time.  The security and privacy of any information stored on {{ APP_TITLE}} is currently dubious.  Enjoy!
         </p>
         <hr>
         <p>
-            Cryptoblog is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
+            {{ APP_TITLE}} is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
         </p>
         <hr>
     </div>

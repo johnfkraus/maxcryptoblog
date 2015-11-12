@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>Unpublished Posts for: {{ user.username }}</h1>
+    <h2>Unpublished Posts for: {{ user.username }}</h2>
     {% for post in posts %}
         <div class="post">
             <p class="date">

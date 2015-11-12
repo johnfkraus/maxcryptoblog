@@ -8,6 +8,7 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from django.conf import settings
 # password = b'password'
 # print('password = ', password, 'password.__class__ = ', password.__class__)
 db = False  # debugging? > verbose output
@@ -16,7 +17,9 @@ db = False  # debugging? > verbose output
 retrievable location in order to derive the same key
 from the password in the future."""
 # salt = os.urandom(16)
-salt = b'AJ\xf6\x12\x970B\x82\x15\xd6\xea\x01\x81k0S'
+
+salt = settings.SALT
+# print('salt = ', salt)
 
 
 def lineno():
@@ -45,7 +48,7 @@ def encrypt(password, plaintext):
         salt=salt,
         iterations=100000,
         backend=default_backend()
-        )
+    )
 
     # convert password to bytes
     bytestring_password = bytes(password, 'utf-8')
@@ -74,7 +77,7 @@ def decrypt(password, ciphertext):
         salt=salt,
         iterations=100000,
         backend=default_backend()
-        )
+    )
 
     # convert password to bytes
     bytestring_password = bytes(password, 'utf-8')

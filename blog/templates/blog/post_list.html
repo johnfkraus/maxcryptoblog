@@ -1,7 +1,7 @@
 <!-- hello from crypto-blog/blog/templates/blog/post_list.html  -->
 {% extends "blog/base.html" %}
 {% block content %}
-<h1>Published Posts ({{ posts|length }})</h1>
+<h2>Published Posts ({{ posts|length }})</h2>
 {% for post in posts %}
 <div class="post">
     <div class="date">
@@ -10,24 +10,24 @@
        <p class="author">
                 author: {{ post.author }}
         </p>
-    <h2>
+    <h3>
         <a href="{% url "post_detail" pk=post.pk %}">
             {{ post.title }}
         </a>
-    </h2>
+    </h3>
 
         {% if post.is_encrypted %}
-        <h4>Ciphertext:</h4>
+        <h5>Ciphertext:</h5>
         <p class="k-post-text k-cipher">
             {{ post.ciphertext|truncatechars_html:350 }}
         </p>
         {% else %}
-        <h4>Plaintext:</h4>
+        <h5>Plaintext:</h5>
         <p class="k-post-text k-plain">
             {{ post.text|truncatechars_html:150 }}</p>
         {% endif %}
 
-    <a href="{% url "blog.views.post_detail" pk=post.pk %}">    Comments: {{ post.comments.count }}
+    <a href="{% url "blog.views.post_detail" pk=post.pk %}">Comments: {{ post.comments.count }}
     </a>
 
 </div>

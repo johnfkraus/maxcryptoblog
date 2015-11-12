@@ -1,10 +1,17 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <h1>New post</h1>
+    <h2>New post</h2>
 
        <p class="author">
-                author: {{ user.username }}
+                author: 
+                request.user: 
+                {{ request.user }}
+                request.user.name:
+                {{ request.user.name }}
+<!--
+                {{ user.username }}
+-->
         </p>
 
 

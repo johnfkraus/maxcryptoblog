@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Lobster'), local('Lobster-Regular'), 
-       url('Lobster.woff') 
+       url('../fonts/Lobster.woff') 
        format('woff');
 }
 
