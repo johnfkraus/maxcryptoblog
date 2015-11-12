@@ -19,5 +19,7 @@ myvenv
 *.zip
 *.hide.txt
 */*.hide.txt
+*/encryption.py
+blog/encryption.py
 
 # */settings_*.py
