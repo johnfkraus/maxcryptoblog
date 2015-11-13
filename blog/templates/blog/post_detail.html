@@ -29,13 +29,13 @@
 
     {% if user.is_authenticated  %}
         {% ifequal user post.author %}
-
             {% if not post.is_encrypted %}
                 <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
             {% endif %}
- 
+
+    
 
         {% endifequal %}
 
@@ -57,7 +57,11 @@
 
         <a class="btn btn-default" href="{% url 'post_decrypt' pk=post.pk %}"><span class="glyphicon glyphicon-question-sign"></span></a>
     {% endif %} 
-       {% endifequal %}
+        <a class="btn btn-default" href="#">
+            <span class="glyphicon glyphicon-send"></span>
+        </a>
+
+    {% endifequal %}
 
     <h2>{{ post.title }}</h2>
 
