@@ -1,4 +1,13 @@
 *.pyc
+__pycache__
+/static
+.DS_Store
+local_settings.py
+notes.secret.txt
+*.hide.txt
+*.secret.txt
+diffsettings*
+postgres-cheatsheet.md
 *.tmp
 *.swp
 *.db

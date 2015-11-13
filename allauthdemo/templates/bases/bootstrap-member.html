@@ -12,12 +12,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'user_home' %}"><span class="app_title">{{ APP_TITLE|lower }}</span> :: Members Area</a>
+          <a class="navbar-brand" href="{% url 'user_home' %}">
+            <span class="app_title">
+              {{ APP_TITLE|lower }} 
+              <span style="font-size:8px;">alpha</span>
+            </span>
+            <span>
+             :: Members Area
+            </span>
+           </a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'user_home' %}">Home</a></li>
-            <li><a href="{% url 'user_action' %}">{{ APP_TITLE }} Posts</a></li>
+            <li><a href="{% url 'user_action' %}">
+              <span class="app_title">
+              {{ APP_TITLE|lower }} posts
+              </span>
+              </a>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <strong> {{ user.display_name }}</strong> <b class="caret"></b>
