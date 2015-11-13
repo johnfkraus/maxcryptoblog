@@ -79,10 +79,10 @@ class DemoUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def name(self):
-        if self.first_name:
-            return self.first_name
-        elif self.display_name:
+        if self.display_name:
             return self.display_name
+        elif self.first_name:
+            return self.first_name
         elif self.email:
             return self.email
         return 'You'

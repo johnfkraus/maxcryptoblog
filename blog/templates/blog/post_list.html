@@ -8,7 +8,7 @@
         <p>published: {{ post.published_date }}</p>
     </div>
        <p class="author">
-                author: {{ post.author }}
+                author: {{ post.author.name }}
         </p>
     <h3>
         <a href="{% url "post_detail" pk=post.pk %}">

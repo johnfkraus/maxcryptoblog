@@ -8,9 +8,11 @@
             published: {{ post.published_date }}
         </div>
         <p class="author">
-                author: {{ post.author }}
+                author: {{ post.author.name }}
         </p>
-        {% ifequal user.username post.author.username %}
+        <!--user: {{ user }}
+        post.author: {{ post.author }} -->
+        {% ifequal user post.author %}
         <a class="btn btn-default" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
         {% endifequal %}
     {% else %}
@@ -18,15 +20,15 @@
            created: {{ post.created_date }}
         </div>
         <p class="author">
-                author: {{ post.author }}
+                author: {{ post.author.name }}
         </p>
-        {% ifequal user.username post.author.username %}
+        {% ifequal user post.author %}
             <a class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
         {% endifequal %}
     {% endif %}
 
     {% if user.is_authenticated  %}
-        {% ifequal user.username post.author.username %}
+        {% ifequal user post.author %}
 
             {% if not post.is_encrypted %}
                 <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}">
@@ -37,7 +39,7 @@
 
         {% endifequal %}
 
-        {% ifequal user.username post.author.username %}
+        {% ifequal user post.author %}
         <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
@@ -48,7 +50,7 @@
         </a>
     {% endif %}
 
-    {% ifequal user.username post.author.username %}
+    {% ifequal user post.author %}
     {% if not post.is_encrypted %}
         <a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}"><span class="glyphicon glyphicon-lock"></span></a>
         {% else %}

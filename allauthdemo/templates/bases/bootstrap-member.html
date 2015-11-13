@@ -12,7 +12,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'user_home' %}">
+          <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
             <span class="app_title">
               {{ APP_TITLE|lower }} 
               <span style="font-size:8px;">alpha</span>
@@ -24,9 +24,16 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'user_home' %}">Home</a></li>
+            <!-- li><a href="{% url 'user_home' %}">Home</a></li -->
+<li>
+            <a href="{% url 'user_home' %}"  class="top-menu">
+                <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
+            </a>
+</li>
+
+
             <li><a href="{% url 'user_action' %}">
-              <span class="app_title">
+              <span class="app_title_small">
               {{ APP_TITLE|lower }} posts
               </span>
               </a>

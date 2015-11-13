@@ -5,15 +5,9 @@
 
        <p class="author">
                 author: 
-                request.user: 
-                {{ request.user }}
-                request.user.name:
                 {{ request.user.name }}
-<!--
-                {{ user.username }}
--->
+                ({{ request.user }})
         </p>
-
 
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}

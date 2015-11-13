@@ -1,18 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h2>Unpublished Posts for: {{ user.username }}</h2>
+    <h2>Unpublished Posts for: {{ user.name }}</h2>
     {% for post in posts %}
         <div class="post">
             <p class="date">
                 created: {{ post.created_date|date:'m-d-Y' }}
             </p>
             <p class="author">
-                author: {{ post.author }}
+                author: {{ post.author.name }}
             </p> 
-            <h2>
+            <h3>
                 <a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a>
-            </h2>
+            </h3>
 
             <p>{{ post.text|truncatechars:200 }}</p>
 

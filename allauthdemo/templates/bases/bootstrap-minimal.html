@@ -11,11 +11,36 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand app_title" href="/">{{ APP_TITLE|lower }}</a>
+          <!--a class="navbar-brand app_title" href="/">{{ APP_TITLE|lower }}
+-->
+
+          <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
+            <span class="app_title">
+              {{ APP_TITLE|lower }} 
+              <span style="font-size:8px;">alpha</span>
+            </span>
+            <span>
+            </span>
+           </a>
+
+
+
+
+          <!-- /a -->
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'landing_index' %}"><strong>Home</strong></a></li>
+            <li>
+
+
+
+            <a href="{% url 'landing_index' %}"  class="top-menu">
+                <span class="glyphicon glyphicon-home"></span>
+
+
+
+
+            </a></li>
             <li><a href="{% url 'account_signup' %}"><strong>Join</strong></a></li>
             <li><a href="{% url 'account_login' %}"><strong>Log In</strong></a></li>
           </ul>

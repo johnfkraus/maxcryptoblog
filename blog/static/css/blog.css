@@ -57,6 +57,17 @@ h1 {
 .app_title {
     font-family: 'zian';
     color: #428BCA !important;
+    font-size: 36px;
+}
+
+.app_title_small {
+    font-family: 'zian';
+    color: #428BCA !important;
+    font-size: 16px;
+}
+
+.glyphicon-home {
+    color: #428BCA !important;
 }
 
 .date {

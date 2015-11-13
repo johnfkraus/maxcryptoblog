@@ -5,11 +5,11 @@
 
 <div class="container">
   <div class="jumbotron text-center">
-    <h1><span class="app_title">{{ APP_TITLE|lower }}</span></h1>
+    <h1><span class="app_title">{{ APP_TITLE|lower }}
+      <span style="font-size:16px;">alpha</span>
+    </span></h1>
     <p class="lead">
-<!--
-      Read more on the <a href="{   % url 'landing_about' %   }">About Page.</a>
--->
+      <!--  Read more on the <a href="{   % url 'landing_about' %   }">About Page.</a> -->
       Read more on the <a href="{% url 'about' %}">About Page.</a>
     </p>
     <p>
