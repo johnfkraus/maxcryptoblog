@@ -69,12 +69,12 @@ INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id) VALUES (
 {% endif %}
 """)
 
-#settings_template = Template(open("allauthdemo/settings.template.py").read())
+# settings_template = Template(open("allauthdemo/settings.template.py").read())
 settings_template = get_template("settings.template.py")
 
-default_superuser_first_name='John'
-default_superuser_last_name='Kraus'
-default_superuser_email='johnkraus3@gmail.com'
+default_superuser_first_name = 'John'
+default_superuser_last_name = 'Kraus'
+default_superuser_email = 'johnkraus3@gmail.com'
 
 
 def heading(text):
@@ -84,7 +84,7 @@ def heading(text):
 
 
 def ask_yes_no(msg):
-    msg = "\n" + msg.strip()+'\n\nPlease enter "yes" or "no": '
+    msg = "\n" + msg.strip() + '\n\nPlease enter "yes" or "no": '
     confirm = input(msg)
     while True:
         confirm = confirm.strip().lower()
@@ -108,7 +108,7 @@ def ask_text(need, default=None):
         elif default is not None:
             return default
         else:
-            pass # raw_input('Please enter a value.')
+            pass  # raw_input('Please enter a value.')
 
 
 def ask_superuser():
@@ -165,4 +165,3 @@ if __name__ == "__main__":
     print("\nAll done!\n")
     print("Have a look in seed.sql\n\n")
     print("Next:\n  make rebuild\n  make run  (or ``python manage.py runserver``)")
-

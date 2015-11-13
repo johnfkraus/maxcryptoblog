@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from django.contrib.sites.models import Site
+
 from .models import Post, Comment, Question, Choice
 
 
@@ -28,6 +30,18 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['approved_comment', 'author', 'created_date']
 
 
+class SiteAdmin(admin.ModelAdmin):
+    """ ADDING the id to the displayed values """
+    list_display = ('id', 'domain', 'name')
+    search_fields = ('domain', 'name')
+
+
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+
+
+admin.site.unregister(Site)
+""" unregistering Site so we can re-reregister it with SiteAdmin; we customized SiteAdmin to add the id to the display """
+
+admin.site.register(Site, SiteAdmin)

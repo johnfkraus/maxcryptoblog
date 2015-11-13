@@ -65,7 +65,6 @@ class DemoUserAdmin(UserAdmin):
 
 
 
-
 # *** NOTE ***
 # As the site uses email instead of username, I'm changing how a User object
 # displays or identifies itself in admin. The default in Django (file is

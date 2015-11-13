@@ -144,7 +144,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SITE_ID = 1
+SITE_ID = 2
 AUTH_USER_MODEL = 'allauthdemo_auth.DemoUser'
 LOGIN_REDIRECT_URL = '/member/'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
