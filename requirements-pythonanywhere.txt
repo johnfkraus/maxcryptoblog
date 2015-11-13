@@ -1,0 +1,5 @@
+Django
+cryptography
+django-allauth
+django-bootstrap3
+whitenoise
