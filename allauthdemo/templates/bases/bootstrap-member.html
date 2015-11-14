@@ -3,6 +3,7 @@
 
 {% block nav %}
     <!-- Fixed navbar -->
+        <!-- hello from block nav in allauthdemo/templates/bases/bootstrap-member.html -->
     <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -31,6 +32,11 @@
             </a>
 </li>
 
+<li>
+            <a href="{% url 'about' %}"  class="top-menu">
+                <span class="glyphicon glyphicon-question-sign"  style="color: #428BCA !important;"></span>
+            </a>
+</li>
 
             <li><a href="{% url 'user_action' %}">
               <span class="app_title_small">
