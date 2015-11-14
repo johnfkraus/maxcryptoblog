@@ -1,5 +1,12 @@
 import os
+import inspect
+import sys
+from inspect import getsourcefile
+from os.path import abspath
+
+
 """Handy utils for config"""
+
 
 def contents(*names):
     """Return string contents from first matching named environment variable
@@ -18,5 +25,28 @@ def contents(*names):
                 with open(name) as src:
                     return src.read().strip()
 
-    raise Exception("Unresolved content: "+', '.join(names))
+    raise Exception("Unresolved content: " + ', '.join(names))
 
+
+def lineno():
+    """ Returns the current line number in the program.
+    Danny Yoo (dyoo@hkn.eecs.berkeley.edu).
+    Requires import inspect.
+    """
+    return inspect.currentframe().f_back.f_lineno
+
+
+def we_are_frozen():
+    # All of the modules are built-in to the interpreter, e.g., by py2exe
+    return hasattr(sys, "frozen")
+
+
+def module_path():
+    encoding = sys.getfilesystemencoding()
+    if we_are_frozen():
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(__file__)
+
+
+def get_source_file():
+    abspath(getsourcefile(lambda: 0))
