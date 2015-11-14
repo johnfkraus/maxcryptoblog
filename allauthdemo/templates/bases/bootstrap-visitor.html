@@ -15,22 +15,25 @@
           </button>
           <a class="navbar-brand app_title" href="{% url 'blog.views.post_list' %}">
             {{ APP_TITLE|lower }}
-
               <span style="font-size:8px;">alpha</span>
-
           </a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <!--
             <li><a href="{% url 'landing_index' %}">Welcome</a></li>
+            -->
             <li><a href="{% url 'blog.views.post_list' %}">
               <span class="app_title_small">
                 {{ APP_TITLE|lower }}
                 posts
               </span></a></li>
-
             <!-- li><a href="{ % url 'landing_about' %  }">About</a></li -->
-<li><a href="{% url 'about' %}">About</a></li>
+                    <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
+
+            <li><a href="{% url 'about' %}">About</a></li>
+            
+
             <li><a href="{% url 'account_signup' %}"><strong>Join</strong></a></li>
             <li><a href="{% url 'account_login' %}"><strong>Log In</strong></a></li>
           </ul>

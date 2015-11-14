@@ -16,69 +16,78 @@
 <div id="k-container">
  <div id="k-content">
 
-    <div  class="page-header">
-        <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
-        <!--user: {{ user }}
-        user.is_authenticated: {{ user.is_authenticated }} -->
-        {%  if  user.is_authenticated   %}
-        <!--  user is authenticated!  -->
+    {% block page-header %}
 
-            <a href="{% url 'user_home' %}"  class="top-menu">
+    <div  class="page-header">
+        <span class="right-side-of-header"
+            style="margin-top:10px;">
+            <a href="{% url "about" %}" 
+                class="top-menu">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </a>
+            <!--user: {{ user }}
+            user.is_authenticated: {{ user.is_authenticated }} -->
+            {%  if  user.is_authenticated   %}
+            <!--  user is authenticated!  -->
+            <a href="{% url 'user_home' %}" class="top-menu">
                 <span class="glyphicon glyphicon-home"></span>
             </a>
-
             <a href="{% url "post_new"%}" class="top-menu">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
-
             <a href="{% url "post_draft_list" %}" class="top-menu">
                 <span class="glyphicon glyphicon-edit"></span>
             </a>
-
             <p class="top-menu">
-                Hello 
-                {{ request.user.name }}
-            <small>
-                <!-- <a href="{  % url "django.contrib.auth.views.logout" %  }"> -->
-                <a href="{% url "account_logout" %}">
-                    &nbsp;(Log out)
-                </a>
-            </small>
+                Hello {{ request.user.name }}
+                <small>
+                    <!-- <a href="{  % url "django.contrib.auth.views.logout" %  }"> -->
+                    <a href="{% url "account_logout" %}">
+                        &nbsp;(Log out)
+                    </a>
+                </small>
             </p>
-        {% else %}
-            <!-- <a href="{  % url "django.contrib.auth.views.login" %  }" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
-     <a href="{% url "account_login" %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            {% else %}
+                <!-- <a href="{  % url "django.contrib.auth.views.login" %  }" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
+            <a href="{% url "account_login" %}" class="top-menu">
+                <span class="glyphicon glyphicon-lock"></span>
+            </a>
             <p class="top-menu">
                 Hello Guest
             </p>
-        {% endif %}
+            {% endif %}
+        </span><!--  /right sie of header -->
 
-        <div id="header_container" style="overflow:visible;">
-            <img src="{% static "images/django-logo-50x50.png" %}" alt="django logo" style="float:left; margin: 0 15px;"/>
+        <div id="header_container" 
+            style="overflow:visible;">
+            
+            <img src="{% static "images/django-logo-50x50.png" %}" 
+                alt="django logo" 
+                style="float:left; margin:0 15px;"/>
+            
             <h1 class="app_title" style="margin: 0 15px;">
-        {% if user.is_authenticated   %}
-            <a  href="{% url "blog.views.post_list" %}">
-        {% else %}
-            <a href="{% url "blog.views.post_list" %}">
-        {% endif %}
-                <!-- blog.views.post_list"  %  } ">   max cryptoblog -->
-            {{ APP_TITLE|lower }}
+                <a  href="{% url "blog.views.post_list" %}">
+                    {{ APP_TITLE|lower }}
                 </a>
                 <span class="devstage">alpha</span>
             </h1>
         </div>
-</div>
-<!-- /page header -->
+    </div>
+    <!-- /page header -->
+                {% endblock page-header %}
 
-            <div class="content container">
-                <div class="row">
-                    <div class="col-md-8">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
-                </div>
+        {% block test1 %}
+        <!-- block test1 in base.html -->
+        {% endblock test1 %}
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock content %}
             </div>
-
+        </div>
+    </div>
 </div>
 </div>
 {% block footer %}

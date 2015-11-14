@@ -1,5 +1,19 @@
 <!-- hello from crypto-blog/blog/templates/blog/post_list.html  -->
 {% extends "blog/base.html" %}
+
+{% block test1 %}
+<span class="test1"></span>
+<!--  block test1 in post_list.html -->
+
+{% endblock test1 %}
+
+
+{#
+{ % block page-header % }
+REPLACEMENT HEADER!!
+{ % endblock page-header % }
+ #}  
+
 {% block content %}
 <h2>Published Posts ({{ posts|length }})</h2>
 {% for post in posts %}

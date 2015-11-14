@@ -2,6 +2,14 @@ html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
 
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
 .page-header {
     /* background-color: #ff9400;  */
     background-color: #f8f8f8;
@@ -99,7 +107,7 @@ h1 {
     /* color: #ffffff; */
     float: right;
     font-size: 16pt;
-    margin-right: 20px !important;
+   /* margin-right: 20px !important;  */
     margin: 0 20px 0 0 !important;
 }
 
