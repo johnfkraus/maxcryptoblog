@@ -30,10 +30,7 @@
               </span></a></li>
             <!-- li><a href="{ % url 'landing_about' %  }">About</a></li -->
                     <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
-
             <li><a href="{% url 'about' %}">About</a></li>
-            
-
             <li><a href="{% url 'account_signup' %}"><strong>Join</strong></a></li>
             <li><a href="{% url 'account_login' %}"><strong>Log In</strong></a></li>
           </ul>
@@ -41,5 +38,4 @@
       </div>
     </div>
 
-{% endblock %}
-
+{% endblock nav %}

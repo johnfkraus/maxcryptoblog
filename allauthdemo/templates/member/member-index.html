@@ -12,10 +12,13 @@
     <div class="col-sm-6 col-md-4 col-lg4">
       <p class="sticky taped2" style="width: 250px;">
         <strong>Welcome {{ request.user.name }}!</strong><br>
-        At this point, the site has<br />
-        authenticated you and <br> possibly retrieved<br />
+        The site has<br />
+        authenticated you.
+         <!--
+         and <br> possibly retrieved<br />
         your picture and details<br />
         from <a href='http://en.gravatar.com/' target='_blank'>Gravatar</a>.
+      -->
       </p>
     </div>
 
@@ -43,7 +46,10 @@
         <li>{% if request.user.profile.account_verified %}Verified{% else %}Unverified{% endif %}</li>
     -->
       </ul>
-      <a href="{% url 'account_profile' %}">Edit</a>
+      <a class="btn btn-default" href="{% url 'account_profile' %}">
+        <i class="fa fa-pencil fa-lg"></i>
+        &nbsp;Edit
+      </a>
     </div>
   </div>
 </div>

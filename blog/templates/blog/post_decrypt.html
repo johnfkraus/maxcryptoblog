@@ -4,7 +4,10 @@
     <h2>Decrypt post</h2>
         <form method="POST" class="post-form">{% csrf_token %}
         {{ form }}
-        <button type="submit" class="save btn btn-default">Decrypt</button>
+        <button type="submit" class="save btn btn-default">
+            <i class="fa fa-key fa-lg"></i>
+            &nbsp;Decrypt
+        </button>
     <br />
     </form>
             <h2>{{ post.title }}</h2>
