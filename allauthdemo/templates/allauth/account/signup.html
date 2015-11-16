@@ -9,8 +9,9 @@
 {% block inner-content %}
 {% get_providers as socialaccount_providers %}
 
-<h1>{% trans "Sign Up" %}</h1>
-    
+
+<h1 class="text-center">{% trans "Sign Up" %}</h1>
+<hr>
 <div class="row">
   {% if socialaccount_providers  %}
   <div class="col-md-5 col-lg-5">
