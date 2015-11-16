@@ -40,8 +40,13 @@ except ImportError:
 
 try:
     from allauthdemo.settings_local import *
+    print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'settings_local imported')
 except ImportError:
     sys.stderr.write("WARNING: No local settings found.\n\n")
     pass
 
-print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'DEBUG =', DEBUG)
+
+try:
+    print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'DEBUG =', DEBUG)
+except NameError:
+    print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'DEBUG is not defined')

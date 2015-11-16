@@ -144,3 +144,9 @@ SOCIALACCOUNT_AUTO_SIGNUP = False  # require social accounts to use the signup f
 
 # print('BASE_DIR = ', BASE_DIR)
 # print('STATICFILES_DIRS = ', STATICFILES_DIRS)
+
+
+ALLOWED_HOSTS = [
+    'johnfkraus.pythonanywhere.com',  # Allow domain and subdomains
+    'http://localhost:8000',
+]
