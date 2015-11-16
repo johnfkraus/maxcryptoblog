@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block nav %}
+<!-- bootstrap-minimmal block nav -->
     <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -28,13 +29,14 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-
-            <a href="{% url 'landing_index' %}"  class="top-menu">
-                <span class="glyphicon glyphicon-home"></span>
-
-            </a></li>
-            <li><a href="{% url 'account_signup' %}"><strong>Join</strong></a></li>
-            <li><a href="{% url 'account_login' %}"><strong>Log In</strong></a></li>
+              <a href="{% url 'landing_index' %}"  class="top-menu">
+                  <span class="glyphicon glyphicon-home"></span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
+            </li>
+            <li><a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a></li>
           </ul>
         </div>
       </div>

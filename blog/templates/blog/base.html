@@ -76,8 +76,29 @@
               Hello Guest
           </p>
           {% endif %}
-        </span><!--  /right sie of header -->
 
+
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="{% url 'landing_index' %}"  class="top-menu">
+                  <span class="glyphicon glyphicon-home"></span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
+            </li>
+            <li><a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a></li>
+          </ul>
+
+
+
+
+
+
+        </span><!--  /right side of header -->
+<!--
         <div id="header_container" style="overflow:visible;">
 
           <img src="{% static "images/django-logo-50x50.png" %}" 
@@ -90,7 +111,8 @@
               </a>
               <span class="devstage">alpha</span>
           </h1>
-        </div><!-- /header_container -->
+        </div --><!-- /header_container -->
+  
       </div><!-- /page header -->
       {% endblock page-header %}
 
@@ -126,6 +148,20 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
                 <!-- li><a href="{% url 'user_home' %}">Home</a></li -->
+
+
+            <li>
+              <a href="{% url 'landing_index' %}"  class="top-menu">
+                  <span class="glyphicon glyphicon-home"></span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
+            </li>
+            <li><a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a></li>
+
+
+
                 <li>
                   <a href="{% url 'user_home' %}"  class="top-menu">
                       <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
@@ -146,6 +182,9 @@
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0 20px 0 0 !important;">
+          
+                    <strong>Hello Guest</strong>
+
                     <strong> {{ user.display_name }}</strong> <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
@@ -159,6 +198,7 @@
                   </ul>
                 </li>
                 <li>{% if user.profile.avatar_url %}<img alt="" style="width:50px; height:50px" src="{{user.profile.avatar_url}}">{% endif %}</li>
+
 
               </ul>
             </div>

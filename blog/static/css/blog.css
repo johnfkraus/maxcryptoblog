@@ -167,3 +167,23 @@ login page
 
     font-size: 16px;
 }
+
+label {
+    font-weight: normal;
+}
+
+input#id_password, input#id_save_password {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+ 
+.blog-post-title {
+    color: #428BCA;
+
+}
+
+.ciphertext {
+
+    color: red;
+}

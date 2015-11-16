@@ -30,11 +30,9 @@ blog/templates/blog/post_detail.html block page-header!!
                   <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
               </a>
             </li>
-
             <li>
                 <a href="{% url 'about' %}"  class="btn btn-default"  style="padding: 2px 4px; margin-top:14px; margin-bottom:14px; margin-right:15px;>
                 <!--span class="glyphicon glyphicon-question-sign"  style="color: #428BCA !important;"></span-->
-
                     <i class="fa fa-question fa-lg"></i>
                     &nbsp;About
                 </a>
@@ -157,36 +155,47 @@ blog/templates/blog/post_detail.html block page-header!!
 
     {% endifequal %}
 
-    <h2>{{ post.title }}</h2>
+    <h2 class="blog-post-title">{{ post.title }}</h2>
 
-        {% if not post.is_encrypted %}
-        <h4>Plaintext:</h4>
-        <p>{{ post.text|linebreaks }}</p>
-        {% else %}
-        <h4>Ciphertext:</h4>
-        <p>{{ post.ciphertext|linebreaks }}</p>
+    {% if not post.is_encrypted %}
+    <h4>Plaintext:</h4>
+    <div class="plaintext">
+
+        {{ post.text|linebreaks }}
+
+    </div>
+    {% else %}
+    <h4>Ciphertext:</h4>
+    <div class="ciphertext">
+    <!--p class="ciphertext"-->
+
+        {{ post.ciphertext|linebreaks }}
+    
+    <!--/p-->
+    </div>
+    {% endif %}
+</div><!-- /post -->
+
+<hr>
+<a  class="btn btn-default" href="{% url "add_comment_to_post" pk=post.pk %}">Add comment</a>
+
+{% for comment in post.comments.all %}
+<div class="comment">
+    <div class="date">
+        {{ comment.created_date }}
+
+        {% if not comment.approved_comment %}
+        <a class="btn btn-default" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
+        <a class="btn btn-default" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
         {% endif %}
+
     </div>
-    <hr>
-    <a  class="btn btn-default" href="{% url "add_comment_to_post" pk=post.pk %}">Add comment</a>
-
-    {% for comment in post.comments.all %}
-    <div class="comment">
-        <div class="date">
-            {{ comment.created_date }}
-
-            {% if not comment.approved_comment %}
-            <a class="btn btn-default" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-
-            <a class="btn btn-default" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-            {% endif %}
-
-        </div>
-        <div>comment author: {{ comment.author.name }}</div>
-        <p>{{ comment.text|linebreaks }}</p>
-    </div>
-    {% empty %}
-    <p class="k-nocomment">No comments here yet :-(</p>
-    {% endfor %}
+    <div>comment author: {{ comment.author.name }}</div>
+    <p>{{ comment.text|linebreaks }}</p>
+</div>
+{% empty %}
+<p class="k-nocomment">No comments here yet :-(</p>
+{% endfor %}
 
 {% endblock %}

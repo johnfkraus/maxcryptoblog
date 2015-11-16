@@ -21,7 +21,8 @@ class EncryptForm(forms.ModelForm):
         # save_password = forms.BooleanField(label="Save password? (not recommended)")
         fields = ('password', 'save_password')
         labels = {
-            'save_password': _('Save password? (not recommended)'),
+            'password': _('Password'),
+            'save_password': _(' Save password? (not recommended)'),
         }
         widgets = {'text': forms.HiddenInput()}
 
