@@ -50,9 +50,9 @@
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
+              <!--span class="icon-bar"></span>
               <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+              <span class="icon-bar"></span-->
             </button>
             <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
               <img src="{% static "images/django-logo-35x35.png" %}" 
@@ -66,7 +66,7 @@
             </a>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
               {% if user.is_authenticated %}
               <!-- user is authenticated!  -->
               <li>
@@ -114,7 +114,9 @@
 
           {% if not user.is_authenticated %}
           <li>
-            <strong>Hello Guest</strong>
+            <a href="#">
+              <strong>Hello Guest</strong>
+            </a>
           </li>
             {% else %}
           <li class="dropdown">
@@ -123,17 +125,26 @@
             </a>
             <ul class="dropdown-menu">
               <li class="dropdown-header">Account</li>
-              <li><a href="{% url 'account_profile' %}"><i class="fa fa-cog"></i> Settings</a></li>
-              <li><a href="{% url 'account_email' %}"><i class="fa fa-envelope"></i> Email Addresses</a></li>
-              <li><a href="{% url 'socialaccount_connections' %}"><i class="fa fa-facebook"></i> Social Networks</a></li>
-              <li><a href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+              <li>
+                <a href="{% url 'account_profile' %}">
+                  <i class="fa fa-cog"></i> 
+                    Settings
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'account_email' %}"><i class="fa fa-envelope"></i> Email Addresses</a></li>
+              <li>
+                <a href="{% url 'socialaccount_connections' %}"><i class="fa fa-facebook"></i> Social Networks</a></li>
+              <li>
+                <a href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i> Change Password</a></li>
               <li class="divider"></li>
-              <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+              <li>
+                <a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
             </ul>
           </li>
           <li>
             {% if user.profile.avatar_url %}
-              <img alt="" style="width:50px; height:50px" src="{{user.profile.avatar_url}}">
+              <img alt="avatar" style="width:50px; height:50px" src="{{user.profile.avatar_url}}">
             {% endif %}
           </li>
 

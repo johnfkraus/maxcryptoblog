@@ -1,29 +1,41 @@
 html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
-
 .navbar-nav > li > a {
+    color: #428BCA;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 0;
     padding-right: 0;
+
 }
 
-
-.page-header {
-    /* background-color: #ff9400;  */
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
+.post-list-title {
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    /* color: #ffffff; */
-    font-size: 36pt;
-    text-decoration: none;
+.nav .navbar-nav .navbar-right {
+    padding-right: 20px;
 }
 
+ul.navbar-right > li  > a {
+    color: #428BCA;
+
+    margin-right: 5px;
+}
+
+.navbar {
+    color: #428BCA;
+}
+
+.navbar-default .navbar-nav > li > a {
+     color: #428BCA;
+}
+
+.navbar-nav > li > a:focus {
+    color: #226BFF;
+}
 
 .page-footer {
    /* background-color: #ff9400;  */
@@ -89,8 +101,6 @@ h1 {
     margin: 0 10px;
 }
 
-
-
 .save {
     float: right;
 }
@@ -115,23 +125,15 @@ h1 {
     margin-bottom: 70px;
 }
 
-.k-post-text {
+.ciphertext {
+    color: red;
     word-wrap: break-word; 
-    /* height: 200px;
-    overflow: scroll;
-    width: 100%;
-    padding: 8px; */
+
 }
 
-.k-plain {
-    /* background-color:#eee;
-*/
-}
+.plaintext {
+    word-wrap: break-word; 
 
-.k-cipher {
-  /*  color: white;
-    background-color: black;
-*/
 }
 
 .post h1 a, .post h1 a:visited {
@@ -180,22 +182,12 @@ input#id_password, input#id_save_password {
     color: #428BCA;
 }
 
-.navbar {
-    color: #428BCA;
-}
-
-.navbar-default .navbar-nav > li > a {
-     color: #428BCA;
-}
-
-.navbar-nav > li > a:focus {
-    color: #226BFF;
-}
-
 .dropdown-toggle, .glyphicon {
     color: #428BCA;
 }
 
-.ciphertext {
-    color: red;
+
+
+i.fa {
+    width: 20px;
 }

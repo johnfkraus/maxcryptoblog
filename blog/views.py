@@ -66,8 +66,8 @@ def post_edit(request, pk):
 @login_required
 def post_draft_list(request):
     print(lineno(), 'request.user =', request.user)
-    posts = Post.objects.filter(published_date__isnull=True).filter(author=request.user).order_by('-created_date')
-    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+    draft_posts = Post.objects.filter(published_date__isnull=True).filter(author=request.user).order_by('-created_date')
+    return render(request, 'blog/post_draft_list.html', {'draft_posts': draft_posts})
 
 
 @login_required
