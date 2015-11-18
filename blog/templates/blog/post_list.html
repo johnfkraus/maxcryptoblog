@@ -1,51 +1,54 @@
-<!-- hello from crypto-blog/blog/templates/blog/post_list.html  -->
 {% extends "blog/base.html" %}
+<!-- hello from crypto-blog/blog/templates/blog/post_list.html -->
 
-{% block test1 %}
-<span class="test1"></span>
-<!--  block test1 in post_list.html -->
+          {% block mc_posts %}
+          {% endblock mc_posts %}
 
-{% endblock test1 %}
-
-
-{#
-{ % block page-header % }
-REPLACEMENT HEADER!!
-{ % endblock page-header % }
- #}  
 
 {% block content %}
 <h3>Published Posts ({{ posts|length }})</h3>
 {% for post in posts %}
 <div class="post">
+
     <div class="date">
         <p>published: {{ post.published_date }}</p>
     </div>
-       <p class="author">
-                author: {{ post.author.name }}
-        </p>
+
+    <p class="author">
+        author: {{ post.author.name }}
+    </p>
+
     <h3>
         <a href="{% url "post_detail" pk=post.pk %}">
             {{ post.title }}
         </a>
     </h3>
 
-        {% if post.is_encrypted %}
-        <h5>Ciphertext:</h5>
-        <div class="ciphertext">
-            <p class="k-post-text k-cipher">
-                {{ post.ciphertext|truncatechars_html:350 }}
-            </p>
-        </div>
-        {% else %}
-        <h5>Plaintext:</h5>
-        <p class="k-post-text k-plain">
-            {{ post.text|truncatechars_html:150 }}</p>
-        {% endif %}
+    {% if post.is_encrypted %}
 
-    <a href="{% url "blog.views.post_detail" pk=post.pk %}">Comments: {{ post.comments.count }}
+    <h5>Ciphertext:</h5>
+    <div class="ciphertext">
+        <p class="k-post-text k-cipher">
+            {{ post.ciphertext|truncatechars_html:350 }}
+        </p>
+    </div>
+    
+    {% else %}
+    
+    <h5>Plaintext:</h5>
+    
+    <p class="k-post-text k-plain">
+        {{ post.text|truncatechars_html:150 }}
+    </p>
+    
+    {% endif %}
+
+    <a href="{% url "blog.views.post_detail" pk=post.pk %}">
+        Comments: {{ post.comments.count }}
     </a>
 
-</div>
+    </div>
+
 {% endfor %}
+
 {% endblock content %}

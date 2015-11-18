@@ -1,12 +1,11 @@
-{% extends "bases/bootstrap-member.html" %}
-
+{% extends "blog/base.html" %}
 {% load bootstrap3 %}
 
-
 {% block content %}
-<!--  allauthdemo/templates/auth/profile.html just inside block content -->
-<!--div class="container"-->
+<!-- allauthdemo/templates/auth/profile.html just inside block content -->
+
 <h1>Profile</h1>
+
   {# Hmm. Not thrilled about this. #}
   {# Could use django-bootstrap3 which removes some of this ugliness. #}
   {# Or some AJAX-based way to retrieve messages. #}
@@ -21,23 +20,15 @@
         {% bootstrap_form form %}
         {% buttons %}
         <button type="submit" class="btn btn-primary">
-          <!-- { % bootstrap_icon "star" % } -->  Submit
+         Submit
         </button>
         {% endbuttons %}
-    <!--
-        <div class="form-group">
-          <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary pull-right"> Submit </button>
-          </div>
-        </div>
-    -->
       </form>
     </div>
 
     <div class="col-md-6 col-lg-6">
-      TODO: DOB, picture
+<!--      TODO: DOB, picture   -->
     </div>
   </div>
-<!--/div--><!-- container -->
 
 {% endblock content %}

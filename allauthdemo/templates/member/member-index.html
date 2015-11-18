@@ -1,11 +1,11 @@
-{% extends "bases/bootstrap-member.html" %}
+{% extends "blog/base.html" %}
 
 {% load bootstrap3 %}
 
-{% block head_title %}Welcome{% endblock %}
+{% block title %}Welcome{% endblock title %}
 
 {% block content %}
-<!--div class="container"-->
+
   <div class="row">
     {% bootstrap_messages %}
 
@@ -36,15 +36,13 @@
         <li>Last name: <strong>{{user.last_name}}</strong></li>
         <li>Display name: <strong>{{user.display_name}}</strong></li>
         <li>Email: <strong>{{user.email}}</strong></li>
-
-
-<li>{% if request.user.emailaddress_set.first.verified %}
-        Verified
-        {% else %}Unverified{% endif %}</li>
-
-<!--
-        <li>{% if request.user.profile.account_verified %}Verified{% else %}Unverified{% endif %}</li>
-    -->
+        <li>
+          {% if request.user.emailaddress_set.first.verified %}
+            Verified
+          {% else %}
+            Unverified
+          {% endif %}
+        </li>
       </ul>
       <a class="btn btn-default" href="{% url 'account_profile' %}">
         <i class="fa fa-pencil fa-lg"></i>
@@ -52,5 +50,5 @@
       </a>
     </div>
   </div>
-<!--/div--->
+
 {% endblock content %}

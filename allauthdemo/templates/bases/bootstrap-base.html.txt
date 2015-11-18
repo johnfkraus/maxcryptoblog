@@ -1,0 +1,7 @@
+{% extends "blog/base.html" %}
+
+<div class=container>
+  <!--  bases/bootstrap-base.html just before block content -->
+  {% block content %}
+  {% endblock content %}
+</div>

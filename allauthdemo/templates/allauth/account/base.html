@@ -1,10 +1,10 @@
-{% extends "bases/bootstrap-member.html" %}
+{% extends "blog/base.html" %}
 
 {% load i18n %}
 
 {% block content %}
 <!-- allauthdemo/templates/allauth/account/base  block content -->
-<!--div class=container-->
+
   <h1>{% trans 'My Account' %}</h1>
 
   <ul class="nav nav-tabs">
@@ -23,21 +23,8 @@
     <li>No connections url</li>
     {% endif %}
   </ul>
+
   {% block account_content %}
   {% endblock account_content %}
 
-<!--/div-->
-
 {% endblock content %}
-
-"""
-# { #
-# { % block appjs % }
-# <script src="{ % static 'js/jquery.min.js' % }"></script>
-# <script src="{ % static 'js/bootstrap.min.js' % }"></script>
-
-#  { % block appjs_jquery % }
-#  { % endblock appjs_jquery % }
-# { % endblock appjs % }
-# # }
-"""

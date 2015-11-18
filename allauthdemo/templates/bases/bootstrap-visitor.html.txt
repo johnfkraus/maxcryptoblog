@@ -1,4 +1,4 @@
-{% extends "bases/bootstrap-jquery.html" %}
+{% extends "blog/base.html" %}
 {% load staticfiles %}
 
 {% block nav %}
@@ -20,16 +20,15 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <!--
-            <li><a href="{% url 'landing_index' %}">Welcome</a></li>
-            -->
             <li><a href="{% url 'blog.views.post_list' %}">
               <span class="app_title_small">
                 {{ APP_TITLE|lower }}
                 posts
-              </span></a></li>
-            <!-- li><a href="{ % url 'landing_about' %  }">About</a></li -->
-                    <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
+              </span></a>
+            </li>
+            <li>
+              <a href="{% url "about" %}" class="top-menu"><span class="glyphicon glyphicon-question-sign"></span></a>
+            </li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'account_signup' %}"><strong>Join</strong></a></li>
             <li><a href="{% url 'account_login' %}"><strong>Log In</strong></a></li>

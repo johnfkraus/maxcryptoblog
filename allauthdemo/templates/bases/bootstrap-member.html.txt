@@ -1,5 +1,4 @@
-{% extends "bases/bootstrap-jquery.html" %}
-{% load staticfiles %}
+{% extends "blog/base.html" %}
 
 <!--
 { % block nav % }
