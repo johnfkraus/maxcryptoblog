@@ -2,7 +2,8 @@
 
 
 {% block page-header %}
-blog/templates/blog/post_detail.html block page-header!!
+<!--
+blog/templates/blog/post_detail.html block page-header!!  -->
 
     <!-- Fixed navbar -->
         <!-- hello from block nav in allauthdemo/templates/bases/bootstrap-member.html -->
@@ -133,9 +134,10 @@ blog/templates/blog/post_detail.html block page-header!!
 
     {% ifequal user post.author %}
     {% if not post.is_encrypted %}
-        <a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}">
+
+        <!-- a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}">
             <span class="glyphicon glyphicon-lock"></span>
-        </a>
+        </a-->
 
         <a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}">
             <i class="fa fa-lock fa-lg"></i>&nbsp;Encrypt 

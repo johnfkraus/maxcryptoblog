@@ -1,9 +1,11 @@
 {% extends "bases/bootstrap-jquery.html" %}
 {% load staticfiles %}
 
-{% block nav %}
-    <!-- Fixed navbar -->
+<!--
+{ % block nav % }
+    Fixed navbar -->
         <!-- hello from block nav in allauthdemo/templates/bases/bootstrap-member.html -->
+    <!--
     <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -25,7 +27,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+          -->
             <!-- li><a href="{% url 'user_home' %}">Home</a></li -->
+            <!--
             <li>
               <a href="{% url 'user_home' %}"  class="top-menu">
                   <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
@@ -65,5 +69,5 @@
       </div>
     </div>
 
-{% endblock nav %}
-
+{ % endblock nav % }
+-->

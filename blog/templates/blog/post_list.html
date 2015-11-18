@@ -32,9 +32,11 @@ REPLACEMENT HEADER!!
 
         {% if post.is_encrypted %}
         <h5>Ciphertext:</h5>
-        <p class="k-post-text k-cipher">
-            {{ post.ciphertext|truncatechars_html:350 }}
-        </p>
+        <div class="ciphertext">
+            <p class="k-post-text k-cipher">
+                {{ post.ciphertext|truncatechars_html:350 }}
+            </p>
+        </div>
         {% else %}
         <h5>Plaintext:</h5>
         <p class="k-post-text k-plain">

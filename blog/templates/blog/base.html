@@ -1,14 +1,14 @@
 {% load staticfiles %}
 <html>
 <head>
-    <!-- title>{{ APP_TITLE }}</title -->
-    <title>{% block title %}{{ APP_TITLE }}{% endblock %}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- title>{{ APP_TITLE }}</title -->
+  <title>{% block title %}{{ APP_TITLE }}{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -37,53 +37,62 @@
 <!--
   <div id="k-container">
      <div id="k-content">
--->
-      {% block page-header %}
-
-      <div  class="page-header">
-        <span class="right-side-of-header" style="margin-top:10px;">
-          <a href="{% url "about" %}" class="top-menu">
-            <span class="glyphicon glyphicon-question-sign"></span>
-          </a>
+     -->
+     {% block page-header %}
+<!--
+     <div  class="page-header">
+      <span class="right-side-of-header" style="margin-top:10px;">
+        
+        <a href="{% url "about" %}" class="top-menu">
+          <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+      -->
           <!--user: {{ user }}
           user.is_authenticated: {{ user.is_authenticated }} -->
-          {%  if  user.is_authenticated   %}
-          <!--  user is authenticated!  -->
+<!--
+          { % if user.is_authenticated % }
+    -->
+          <!-- user is authenticated!  -->
+          <!--
           <a href="{% url 'user_home' %}" class="top-menu">
-              <span class="glyphicon glyphicon-home"></span>
+            <span class="glyphicon glyphicon-home"></span>
           </a>
           <a href="{% url "post_new"%}" class="top-menu">
-              <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-plus"></span>
           </a>
           <a href="{% url "post_draft_list" %}" class="top-menu">
-              <span class="glyphicon glyphicon-edit"></span>
+            <span class="glyphicon glyphicon-edit"></span>
           </a>
-          <p class="top-menu">
-              Hello {{ request.user.name }}
-              <small>
-                  <!-- <a href="{  % url "django.contrib.auth.views.logout" %  }"> -->
-                  <a href="{% url "account_logout" %}">
-                      &nbsp;(Log out)
-                  </a>
-              </small>
+             <p class="top-menu">
+            Hello {{ request.user.name }}
+            <small>
+            -->
+              <!-- <a href="{ % url "django.contrib.auth.views.logout" %  }"> -->
+              
+<!--
+              <a href="{% url "account_logout" %}">
+                &nbsp;(Log out)
+              </a>
+            </small>
           </p>
-          {% else %}
-          <!-- <a href="{  % url "django.contrib.auth.views.login" %  }" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
+-->
+
+          <!-- { % else % } -->
+          <!-- <a href="{  % url "django.contrib.auth.views.login" %  }" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> 
           <a href="{% url "account_login" %}" class="top-menu">
-              <span class="glyphicon glyphicon-lock"></span>
+            <span class="glyphicon glyphicon-lock"></span>
           </a>
           <p class="top-menu">
-              Hello Guest
+            Hello Guest
           </p>
-          {% endif %}
+        -->
+<!--          { % endif % }  -->
 
-
-
-
+<!--
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="{% url 'landing_index' %}"  class="top-menu">
-                  <span class="glyphicon glyphicon-home"></span>
+              <a href="{% url 'landing_index' %}" class="top-menu">
+                <span class="glyphicon glyphicon-home"></span>
               </a>
             </li>
             <li>
@@ -92,14 +101,9 @@
             <li><a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a></li>
           </ul>
 
+        </span>    --> <!--  /right side of header -->
 
-
-
-
-
-        </span><!--  /right side of header -->
-<!--
-        <div id="header_container" style="overflow:visible;">
+<!--  <div id="header_container" style="overflow:visible;">
 
           <img src="{% static "images/django-logo-50x50.png" %}" 
               alt="django logo" 
@@ -111,111 +115,138 @@
               </a>
               <span class="devstage">alpha</span>
           </h1>
-        </div --><!-- /header_container -->
-  
-      </div><!-- /page header -->
+        </div --><!-- /header_container 
+
+      </div> /page header -->
+
+
       {% endblock page-header %}
 
-      {% block test1 %}
-      <!-- block test1 in base.html -->
-      {% endblock test1 %}
-
-
       {% block nav %}
-        <!-- Fixed navbar -->
-            <!-- blog/templates/blog/base.html block nav -->
-        <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
-                <img src="{% static "images/django-logo-35x35.png" %}" 
+      <!-- Fixed navbar -->
+      <!-- blog/templates/blog/base.html block nav -->
+      <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
+              <img src="{% static "images/django-logo-35x35.png" %}" 
               alt="django logo" 
               style="float:left; margin: -5px 15px 0 0;"/>
 
-
-                <span class="app_title">
-                  {{ APP_TITLE|lower }} 
-                  <span style="font-size:8px;">alpha</span>
-                </span>
-              </a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <!-- li><a href="{% url 'user_home' %}">Home</a></li -->
-
-
-            <li>
-              <a href="{% url 'landing_index' %}"  class="top-menu">
-                  <span class="glyphicon glyphicon-home"></span>
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
-            </li>
-            <li><a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a></li>
-
-
-
-                <li>
-                  <a href="{% url 'user_home' %}"  class="top-menu">
-                      <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
-                  </a>
-                </li>
-
-                <li>
-                <a href="{% url 'about' %}"  class="top-menu">
-                    <span class="glyphicon glyphicon-question-sign"  style="color: #428BCA !important;"></span>
-                </a>
-                </li>
-
-                <li><a href="{% url 'user_action' %}" class="top-menu">
-                  <span class="app_title_small">
-                  {{ APP_TITLE|lower }} posts
-                  </span>
-                  </a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0 20px 0 0 !important;">
-          
-                    <strong>Hello Guest</strong>
-
-                    <strong> {{ user.display_name }}</strong> <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-header">Account</li>
-                    <li><a href="{% url 'account_profile' %}"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="{% url 'account_email' %}"><i class="fa fa-envelope"></i> Email Addresses</a></li>
-                    <li><a href="{% url 'socialaccount_connections' %}"><i class="fa fa-facebook"></i> Social Networks</a></li>
-                    <li><a href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i> Change Password</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
-                  </ul>
-                </li>
-                <li>{% if user.profile.avatar_url %}<img alt="" style="width:50px; height:50px" src="{{user.profile.avatar_url}}">{% endif %}</li>
-
-
-              </ul>
-            </div>
+              <span class="app_title">
+                {{ APP_TITLE|lower }} 
+                <span style="font-size:8px;">alpha</span>
+              </span>
+            </a>
           </div>
-        </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <!-- li><a href="{% url 'user_home' %}">Home</a></li -->
 
-      {% endblock nav %}
+              {% if user.is_authenticated %}
+              <!-- user is authenticated!  -->
+              <li>
+                <a href="{% url 'user_home' %}" class="top-menu">
+                  <span class="glyphicon glyphicon-home"></span>
+                </a>
+              </li>
+              <li>                  
+                <a href="{% url "post_new"%}" class="top-menu">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </a>
+              </li>
+              <li>             
+                <a href="{% url "post_draft_list" %}" class="top-menu">
+                <span class="glyphicon glyphicon-edit"></span>
+                </a>
+              </li>
+              {% endif %}
+
+          <li>
+            <a href="{% url 'landing_index' %}"  class="top-menu">
+              <span class="glyphicon glyphicon-home"></span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
+          </li>
+          <li>
+            <a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a>
+          </li>
+
+          <!--li>
+            <a href="{% url 'user_home' %}"  class="top-menu">
+              <span class="glyphicon glyphicon-home"  style="color: #428BCA !important;"></span>
+            </a>
+          </li-->
+
+          <li>
+            <a href="{% url 'about' %}"  class="top-menu">
+              <span class="glyphicon glyphicon-question-sign"  style="color: #428BCA !important;"></span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'user_action' %}" class="top-menu">
+              <span class="app_title_small">
+                {{ APP_TITLE|lower }} posts
+              </span>
+            </a>
+          </li>
+
+          {% if not user.is_authenticated %}
+          <li>
+            <strong>Hello Guest</strong>
+          </li>
+
+            {% else %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0 20px 0 0 !important;">
+            <strong> {{ user.name }}</strong> <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Account</li>
+            <li><a href="{% url 'account_profile' %}"><i class="fa fa-cog"></i> Settings</a></li>
+            <li><a href="{% url 'account_email' %}"><i class="fa fa-envelope"></i> Email Addresses</a></li>
+            <li><a href="{% url 'socialaccount_connections' %}"><i class="fa fa-facebook"></i> Social Networks</a></li>
+            <li><a href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+          </ul>
+
+        </li>
+        <li>
+          {% if user.profile.avatar_url %}
+            <img alt="" style="width:50px; height:50px" src="{{user.profile.avatar_url}}">
+          {% endif %}
+        </li>
+
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock nav %}
 
 <!--
   <div class="content container">
     <div class="row">
         <div class="col-md-8">
         -->
-          <div class="container">
-            {% block content %}
-            {% endblock content %}
-          </div>
+        <div class="container">
+          {% block content %}
+          {% endblock content %}
+        </div>
         <!--
         </div>
     </div>
@@ -227,20 +258,20 @@
 -->
 {% block footer %}
 <div class=container>
-<hr>
-<footer>
-  <ul class="list-inline pull-right">
+  <hr>
+  <footer>
+    <ul class="list-inline pull-right">
       <!--li><a href="{% url 'website_terms' %}">Terms</a></li-->
-    <li><a href="{% url 'website_contact' %}">Contact</a></li>
-</ul>
-<p class=muted>{% include "copyright.html" %}</p>
-</footer>
+      <li><a href="{% url 'website_contact' %}">Contact</a></li>
+    </ul>
+    <p class=muted>{% include "copyright.html" %}</p>
+  </footer>
 </div>
 {% endblock %}
 
 {% block tail_js %}
-  <script src="{% static 'js/jquery.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 {% block app_js %}
 {% endblock app_js %}

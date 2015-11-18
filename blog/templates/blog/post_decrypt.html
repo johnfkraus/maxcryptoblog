@@ -1,22 +1,20 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <h2>Decrypt post</h2>
-        <form method="POST" class="post-form">{% csrf_token %}
-        {{ form }}
-        <button type="submit" class="save btn btn-default">
-            <i class="fa fa-key fa-lg"></i>
-            &nbsp;Decrypt
-        </button>
+<h3>Decrypt post</h3>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form }}
+    <button type="submit" class="save btn btn-default">
+        <i class="fa fa-key fa-lg"></i>
+        &nbsp;Decrypt
+    </button>
     <br />
-    </form>
-            <h2>{{ post.title }}</h2>
-            <!--
-            <h3>Plaintext:</h3>
-        <p>{{ post.text|linebreaks }}</p>
-    -->
+</form>
+<h2 class="blog-post-title">{{ post.title }}</h2>
 
+<h3>Ciphertext:</h3>
+<div class="ciphertext">
+    <p>{{ post.ciphertext|linebreaks }}</p>
+</div>
 
-        <h3>Ciphertext:</h3>
-        <p>{{ post.ciphertext|linebreaks }}</p>
 {% endblock %}
