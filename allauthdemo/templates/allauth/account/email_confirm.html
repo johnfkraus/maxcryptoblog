@@ -7,36 +7,37 @@
 
 {% block inner-content %}
 
-<div class="container">
-	<h1 class="text-center">{% trans "Confirm E-mail Address" %}</h1>
+<!--div class="container"-->
+<!--  hello from email_confirm.html just after deleted container div -->
+<h1 class="text-center">{% trans "Confirm E-mail Address" %}</h1>
 
-	{% if confirmation %}
+{% if confirmation %}
 
-	{% user_display confirmation.email_address.user as user_display %}
+{% user_display confirmation.email_address.user as user_display %}
 
-	<!-- allauthdemo/templates/allauth/account/email_confirm.html   block content -->
+<!-- allauthdemo/templates/allauth/account/email_confirm.html   block content -->
 
-		<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-		{% csrf_token %}
-	    	
-		<div class="form-actions">
-			<p>{% blocktrans with confirmation.email_address.email as email %}
-				Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
-			</p>
-			<button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
-		</div>
-
-		</form>
-
-	{% else %}
-
-		{% url 'account_email' as email_url %}
-
-		<p>
-			{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url}}">issue a new e-mail confirmation request</a>.{% endblocktrans %}
+	<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+	{% csrf_token %}
+    	
+	<div class="form-actions">
+		<p>{% blocktrans with confirmation.email_address.email as email %}
+			Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
 		</p>
+		<button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
+	</div>
 
-	{% endif %}
-</div><!--  /container -->
+	</form>
+
+{% else %}
+
+	{% url 'account_email' as email_url %}
+
+	<p>
+		{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url}}">issue a new e-mail confirmation request</a>.{% endblocktrans %}
+	</p>
+
+{% endif %}
+<!--/div--><!--  /container -->
 
 {% endblock inner-content %}
