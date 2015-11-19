@@ -1,13 +1,13 @@
 html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
-.navbar-nav > li > a {
-    color: #428BCA;
+.navbar-nav > li > a, .navbar-nav > li > p {
+    color: #428BCA; 
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 0;
     padding-right: 0;
-
+    margin: 0;
 }
 
 .post-list-title {
@@ -21,7 +21,6 @@ body > #k-container { height: auto; min-height: 100%; }
 
 ul.navbar-right > li  > a {
     color: #428BCA;
-
     margin-right: 5px;
 }
 
@@ -197,7 +196,7 @@ input#id_password, input#id_save_password {
 i.fa {
     width: 20px;
 }
-
+/*
 p.hello_guest {
 font-size: 14px;
 line-height: 20px;
@@ -210,3 +209,4 @@ padding-top: 15px;
 
     color: #428BCA;
 }
+*/

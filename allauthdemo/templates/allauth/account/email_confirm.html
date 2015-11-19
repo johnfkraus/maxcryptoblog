@@ -8,7 +8,7 @@
 {% block inner-content %}
 
 <div class="container">
-	<h1>{% trans "Confirm E-mail Address" %}</h1>
+	<h1 class="text-center">{% trans "Confirm E-mail Address" %}</h1>
 
 	{% if confirmation %}
 
@@ -16,12 +16,16 @@
 
 	<!-- allauthdemo/templates/allauth/account/email_confirm.html   block content -->
 
-		<p>{% blocktrans with confirmation.email_address.email as email %}
-			Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
-		</p>
 		<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
 		{% csrf_token %}
-	    	<button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
+	    	
+		<div class="form-actions">
+			<p>{% blocktrans with confirmation.email_address.email as email %}
+				Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+			</p>
+			<button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
+		</div>
+
 		</form>
 
 	{% else %}
