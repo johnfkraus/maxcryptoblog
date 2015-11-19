@@ -90,6 +90,12 @@ h1 {
     color: #428BCA !important;
 }
 
+span.glyphicon {
+    color: #428BCA !important;
+    padding-left: 8px;
+        padding-right: 8px;
+}
+
 .date {
     float: right;
     color: #828282;
@@ -117,8 +123,8 @@ h1 {
     /* color: #ffffff; */
     float: right;
     font-size: 16pt;
-   /* margin-right: 20px !important;  */
-    margin: 0 20px 0 0 !important;
+   /* margin-right: 20px !important;  
+    margin: 0 10px 0 0;  */
 }
 
 .post {
@@ -190,4 +196,17 @@ input#id_password, input#id_save_password {
 
 i.fa {
     width: 20px;
+}
+
+p.hello_guest {
+font-size: 14px;
+line-height: 20px;
+margin-right: 5px;
+margin-bottom: 0;
+padding-bottom: 15px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 15px;
+
+    color: #428BCA;
 }

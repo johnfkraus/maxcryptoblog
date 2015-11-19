@@ -1,0 +1,42 @@
+
+Max
+Accounts Help
+Accounts
+
+    Suspicious activity
+
+Allowing less secure apps to access your account
+
+Google may block sign-in attempts from some apps or devices that do not use modern security standards. Since these apps and devices are easier to break into, blocking them helps keep your account safe.
+
+Some examples of apps that do not support the latest security standards include:
+
+    The Mail app on your iPhone or iPad with iOS 6 or below
+    The Mail app on your Windows phone preceding the 8.1 release
+    Some Desktop mail clients like Microsoft Outlook and Mozilla Thunderbird
+
+Change account access for less secure apps
+
+To help keep Google Apps users' accounts secure, we may block less secure apps from accessing Google Apps accounts. As a Google Apps user, you will see a "Password incorrect" error when trying to sign in. If this is the case, you have two options:
+
+    Option 1: Upgrade to a more secure app that uses the most up to date security measures. All Google products, like Gmail, use the latest security measures.
+    Option 2: Change your settings to allow less secure apps to access your account. We don't recommend this option because it might make it easier for someone to break into your account. If you want to allow access anyway, follow these steps:
+        Go to the "Less secure apps" section in My Account.
+        Next to "Access for less secure apps," select Turn on. (Note to Google Apps users: This setting is hidden if your administrator has locked less secure app account access.)
+
+If you still can't sign in to your account, the "password incorrect" error might be caused by a different reason.
+Share this:
+hc_author_ashley
+
+Ashley is an Accounts expert and the author of this help page. Leave her feedback below about how to improve it.
+Was this article helpful?
+Suspicious activity
+
+    Asked to reset your password
+    Someone changed your password
+    Detecting suspicious activity on your account
+    “Password incorrect” error
+    Allowing less secure apps to access your account
+
+    ©2015 Google Privacy Policy Terms of Service 
+

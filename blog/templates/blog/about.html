@@ -6,19 +6,22 @@
         Features
         </h3>
         <p>
-            {{ APP_TITLE }} is a web application for blogging.
+            {{ APP_TITLE }} is a web application for blogging.  Users may encrypt blog posts with a password.  You can use a different password for each blog post.  
             {{ APP_TITLE}} was created using the Python Django web application framework.
         </p>
         <p>
-            Anyone can read any published blog posts on {{ APP_TITLE }} .
+            Anyone can read any published blog posts on {{ APP_TITLE }}.  
             To create blog posts, you must sign in with a verified email address and password.  
         </p>
         <p>
-            Only you can read or edit your draft (unpublished) blog posts.
+            Only you are allowed to read or edit your draft (unpublished) blog posts.* 
         </p>
         <p>
-            You can encrypt and decrypt your blog posts using a password.
+            You can encrypt and decrypt your blog posts using a password.  You can use a different password to encrypt and decrypt each blog post.  You may opt to have {{ APP_TITLE }} save the password, but this is not recommended. 
         </p>
+<p>
+Topics for blog post encryption, for example, might include 'What Happened in Vegas' or your Manifesto.
+</p>
 <!--   
 Topics suitable for encryption might include:
 What happened in Vegas.
@@ -37,7 +40,7 @@ Your manifesto.
         Cryptograpy
         </h3>
         <p>
-            {{ APP_TITLE}} uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using it cannot be manipulated or read without the key.
+            {{ APP_TITLE}} uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using Fernet cannot be manipulated or read without the key.  The protection may be undermined, however it the user employs a weak encryption password.
         </p>
         <p>
             The Fernet implementation is built on top of the following standard cryptographic primitives:

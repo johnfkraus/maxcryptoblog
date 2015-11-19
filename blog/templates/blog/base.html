@@ -48,13 +48,13 @@
       <div class="navbar navbar-default navbar-static-top navbar-shadow" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
-              <!--span class="icon-bar"></span>
               <span class="icon-bar"></span>
-              <span class="icon-bar"></span-->
-            </button>
-            <a class="navbar-brand" href="{% url 'blog.views.post_list' %}">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button-->
+            <a title="Click to view the published blog posts" class="navbar-brand" href="{% url 'blog.views.post_list' %}">
               <img src="{% static "images/django-logo-35x35.png" %}" 
               alt="django logo" 
               style="float:left; margin: -5px 15px 0 0;"/>
@@ -70,17 +70,17 @@
               {% if user.is_authenticated %}
               <!-- user is authenticated!  -->
               <li>
-                <a href="{% url 'user_home' %}" class="top-menu">
+                <a title="Go to user home page" href="{% url 'user_home' %}" class="top-menu">
                   <span class="glyphicon glyphicon-home"></span>
                 </a>
               </li>
               <li>                  
-                <a href="{% url "post_new"%}" class="top-menu">
+                <a  title="Create a new blog post" href="{% url "post_new"%}" class="top-menu">
                   <span class="glyphicon glyphicon-plus"></span>
                 </a>
               </li>
               <li>             
-                <a href="{% url "post_draft_list" %}" class="top-menu">
+                <a title="View your draft/unpublished posts" href="{% url "post_draft_list" %}" class="top-menu">
                 <span class="glyphicon glyphicon-edit"></span>
                 </a>
               </li>
@@ -89,22 +89,22 @@
 
               {% if not user.is_authenticated %}
           <li>
-            <a href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
+            <a title="Register an account" href="{% url 'account_signup' %}"><strong>Join&nbsp;</strong></a>
           </li>
           <li>
-            <a href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a>
+            <a title="Login to your account"  href="{% url 'account_login' %}"><strong>&nbsp;Log In</strong></a>
           </li>
               {% endif %}
 
           <li>
-            <a href="{% url 'about' %}"  class="top-menu">
+            <a title="About {{ APP_TITLE }}"  href="{% url 'about' %}"  class="top-menu">
               <span class="glyphicon glyphicon-question-sign"  style="color: #428BCA !important;"></span>
             </a>
           </li>
 
           {% block mc_posts %}
           <li>
-            <a href="{% url 'user_action' %}" class="top-menu">
+            <a title="Read the published blog posts" href="{% url 'user_action' %}" class="top-menu" style="margin-right: 10px;">
               <span class="app_title_small">
                 {{ APP_TITLE|lower }} posts
               </span>
@@ -114,13 +114,15 @@
 
           {% if not user.is_authenticated %}
           <li>
-            <a href="#">
+            <!--a href="#"-->
+            <p class="hello_guest">
               <strong>Hello Guest</strong>
-            </a>
+            </p>
+            <!--/a-->
           </li>
             {% else %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0 20px 0 0 !important;">
+            <a title="Your account" href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin: 0 20px 0 0 !important;">
               <strong> {{ user.name }}</strong> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">

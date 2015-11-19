@@ -19,7 +19,7 @@
     </p>
 
     <h3>
-        <a href="{% url "post_detail" pk=post.pk %}">
+        <a title="Click for post details" href="{% url "post_detail" pk=post.pk %}">
             {{ post.title }}
         </a>
     </h3>
@@ -28,7 +28,9 @@
 
         <h5>Ciphertext
         {% if post.ciphertext != post.ciphertext|truncatechars_html:350 %} 
-        (<a href="{% url 'blog.views.post_detail' pk=post.pk %}">truncated</a>)
+        (<a title="Click to view the full post" href="{% url 'blog.views.post_detail' pk=post.pk %}">
+            truncated
+        </a>)
         {% endif %}:
     </h5>
     <div class="ciphertext">
@@ -39,10 +41,9 @@
     
     {% else %}
     
-
     <h5>Plaintext
         {% if post.text != post.text|truncatechars_html:350 %} 
-        (<a href="{% url 'blog.views.post_detail' pk=post.pk %}">truncated</a>)
+        (<a title="Click to view the full post" href="{% url 'blog.views.post_detail' pk=post.pk %}">truncated</a>)
         {% endif %}:
     </h5>
     <div class="plaintext">    

@@ -48,6 +48,7 @@ class DemoUser(AbstractBaseUser, PermissionsMixin):
     add a custom admin form and model.
 
     Remember to change ``AUTH_USER_MODEL`` in ``settings.py``.
+    Change it like this: AUTH_USER_MODEL = 'allauthdemo_auth.DemoUser'
     """
 
     email = models.EmailField(_('email address'), blank=False, unique=True)
