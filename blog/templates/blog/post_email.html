@@ -1,0 +1,33 @@
+<!-- templates/blog/post_email.html 1 -->
+{% extends "blog/base.html" %}
+<!-- templates/blog/post_email.html 3 -->
+{% block content %}
+	<h3>Email post</h3>
+    <form method="POST" class="email-form">{% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">
+			<i class="fa fa-lock fa-lg"></i>&nbsp;
+        	Send email
+        </button>
+        <br />
+    </form>
+    
+    <h2 class="blog-post-title">{{ post.title }}</h2>
+
+    {% if not post.is_encrypted %}
+    <h4>Plaintext:</h4>
+    <div class="plaintext">
+
+        {{ post.get_content|linebreaks }}
+
+    </div>
+    {% else %}
+    <h4>Ciphertext:</h4>
+    <div class="ciphertext">
+
+        {{ post.get_content|linebreaks }}
+    
+    </div>
+    {% endif %}
+
+{% endblock %}

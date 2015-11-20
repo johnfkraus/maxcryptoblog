@@ -7,26 +7,21 @@
 
 {% block inner-content %}
 
-<!--div class="container"-->
-<!--  hello from email_confirm.html just after deleted container div -->
 <h1 class="text-center">{% trans "Confirm E-mail Address" %}</h1>
 
 {% if confirmation %}
 
-{% user_display confirmation.email_address.user as user_display %}
-
-<!-- allauthdemo/templates/allauth/account/email_confirm.html   block content -->
-
+	{% user_display confirmation.email_address.user as user_display %}
+	<!-- hi! allauthdemo/templates/allauth/account/email_confirm.html -->
 	<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
 	{% csrf_token %}
     	
-	<div class="form-actions">
-		<p>{% blocktrans with confirmation.email_address.email as email %}
-			Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
-		</p>
-		<button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
-	</div>
-
+		<div class="form-actions">
+			<button class="btn btn-primary pull-right" type="submit">{% trans 'Confirm' %}</button>
+			<p>{% blocktrans with confirmation.email_address.email as email %}
+				Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+			</p>
+		</div>
 	</form>
 
 {% else %}
@@ -38,6 +33,5 @@
 	</p>
 
 {% endif %}
-<!--/div--><!--  /container -->
 
 {% endblock inner-content %}

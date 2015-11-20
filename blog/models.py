@@ -13,6 +13,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     ciphertext = models.TextField(blank=True, null=True)
+    content = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     last_update_date = models.DateTimeField(blank=True, null=True)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -33,19 +34,23 @@ class Post(models.Model):
 
     def is_encrypted(self):
         if self.text == 'None':
+            self.content = self.ciphertext
             return True
         else:
+            self.content = self.text
             return False
 
     def encrypt(self):
         self.ciphertext = blog.encryption.encrypt(self.password, self.text)
         self.text = 'None'
+        self.content = self.ciphertext
         if self.save_password is False:
             self.password = None
 
     def decrypt(self):
         self.text = blog.encryption.decrypt(self.password, self.ciphertext)
         self.ciphertext = 'None'
+        self.content = self.text
         if self.save_password is False:
             self.password = None
 
@@ -58,12 +63,37 @@ class Post(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Post._meta.fields]
 
+    def content2(self):
+        content_string = self.title + '\n'
+        if self.is_encrypted:
+            content_string += self.ciphertext
+        else:
+            content_string += self.text
+        return content_string
+
+    def set_content(self):
+        content_string = self.title + '\n'
+        if self.is_encrypted:
+            content_string += self.ciphertext
+        else:
+            content_string += self.text
+        self.content = content_string
+        return content_string
+
+    def get_content(self):
+        content_string = self.title + '\n'
+        if self.is_encrypted:
+            content_string += self.ciphertext
+        else:
+            content_string += self.text
+        self.content = content_string
+        return content_string
+
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
     # author = models.ForeignKey('auth.User', related_name="users")
     author = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="users")
-
     # author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -78,6 +108,22 @@ class Comment(models.Model):
 
     def short_text(self):
         return truncatechars(self.text, 100)
+
+
+class EmailMessage(models.Model):
+    post = models.ForeignKey('blog.Post', related_name='emails')
+    # author = models.ForeignKey('auth.User', related_name="users")
+    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="users")
+    # author = models.CharField(max_length=200)
+    content = post.content  # text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    dest_email = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.dest_email + '; ' + self.content
+
+    def short_text(self):
+        return truncatechars(self.__str__, 350)
 
 
 class Question(models.Model):

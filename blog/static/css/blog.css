@@ -1,6 +1,11 @@
 html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
+
+.btn-primary > span.glyphicon {
+    color: white;
+}
+
 .navbar-nav > li > a, .navbar-nav > li > p {
     color: #428BCA; 
     padding-top: 15px;
@@ -34,6 +39,18 @@ ul.navbar-right > li  > a {
 
 .navbar-nav > li > a:focus {
     color: #226BFF;
+}
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #55F;
+    background-color: #E7E7E7;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #99F;
+    background-color: transparent;
 }
 
 .page-footer {
@@ -77,6 +94,8 @@ h1 {
     font-family: 'zian';
     color: #428BCA !important;
     font-size: 36px;
+    position: relative;
+    top: 4px;
 }
 
 .app_title_small {
@@ -86,12 +105,12 @@ h1 {
 }
 
 .glyphicon-home {
-    color: #428BCA !important;
+    /* color: #428BCA !important;  */
 }
 
 span.glyphicon {
-    color: #428BCA !important;
-    padding-left: 8px;
+/*    color: #428BCA !important; */
+/*    padding-left: 8px; */
         padding-right: 8px;
 }
 
@@ -168,8 +187,6 @@ login page
     padding-bottom: 5px;
 }
 
-
-
 .devstage {
     font-size: 16px;
 }
@@ -180,8 +197,7 @@ label {
 
 input#id_password {
     /* margin-left: 5px;
-    margin-right: 5px;
- */
+    margin-right: 5px; */
 }
 
 input#id_save_password {
@@ -196,8 +212,6 @@ input#id_save_password {
 .dropdown-toggle, .glyphicon {
     color: #428BCA;
 }
-
-
 
 i.fa {
     width: 20px;

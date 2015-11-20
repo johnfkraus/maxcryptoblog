@@ -13,7 +13,7 @@
         <!--user: {{ user }}
         post.author: {{ post.author }} -->
         {% ifequal user post.author %}
-            <a title="Unpublished this published post" class="btn btn-default" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
+            <a title="Unpublished this published post" class="btn btn-primary" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
         {% endifequal %}
     {% else %}
         <div class="date">
@@ -23,51 +23,44 @@
             author: {{ post.author.name }}
         </p>
         {% ifequal user post.author %}
-            <a title="Publish your post" class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
+            <a title="Publish your post" class="btn btn-primary" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
         {% endifequal %}
     {% endif %}
 
     {% if user.is_authenticated  %}
         {% ifequal user post.author %}
             {% if not post.is_encrypted %}
-                <a title="Edit your post" class="btn btn-default" href="{% url "post_edit" pk=post.pk %}">
+                <a title="Edit your post" class="btn btn-primary" href="{% url "post_edit" pk=post.pk %}">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
             {% endif %}    
         {% endifequal %}
 
         {% ifequal user post.author %}
-        <a title="Delete your post" class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}">
-            <span class="glyphicon glyphicon-remove"></span>
+        <a title="Delete this post" class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">
+            <span class="glyphicon glyphicon-remove"></span>Delete
         </a>
         {% endifequal %}
     {% else %}
         <a title="Login" href="{% url "account_login" %}" class="top-menu">
-            <span class="glyphicon glyphicon-lock">
+            <span style="margin-left: 0; margin-left: 0;" class="glyphicon glyphicon-lock">
         </a>
     {% endif %}
 
     {% ifequal user post.author %}
     {% if not post.is_encrypted %}
 
-        <!-- a class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}">
-            <span class="glyphicon glyphicon-lock"></span>
-        </a-->
-
-        <a title="Encrypt your post" class="btn btn-default" href="{% url 'post_encrypt' pk=post.pk %}">
+        <a title="Encrypt this post" class="btn btn-primary" href="{% url 'post_encrypt' pk=post.pk %}">
             <i class="fa fa-lock fa-lg"></i>&nbsp;Encrypt 
         </a>
 
         {% else %}
-        <a title="Decrypt your post" class="btn btn-default" href="{% url 'post_decrypt' pk=post.pk %}">
+        <a title="Decrypt this post" class="btn btn-primary" href="{% url 'post_decrypt' pk=post.pk %}">
             <i class="fa fa-key fa-lg"></i>&nbsp;Decrypt 
         </a>
-        <a title="About" class="btn btn-default" href="{% url 'post_decrypt' pk=post.pk %}">
-            <span class="glyphicon glyphicon-question-sign"></span>
-        </a>
     {% endif %} 
-        <a title="Email your post (coming soon)" class="btn btn-default" href="#">
-            <span class="glyphicon glyphicon-send"></span>
+        <a title="Email this post (coming soon)" class="btn btn-primary" href="#">
+            <span class="glyphicon glyphicon-send"></span>Email
         </a>
 
     {% endifequal %}
@@ -94,7 +87,7 @@
 </div><!-- /post -->
 
 <hr>
-<a  class="btn btn-default" href="{% url "add_comment_to_post" pk=post.pk %}">Add comment</a>
+<a  class="btn btn-primary" href="{% url "add_comment_to_post" pk=post.pk %}">Add comment</a>
 
 {% for comment in post.comments.all %}
 <div class="comment">
@@ -102,9 +95,9 @@
         {{ comment.created_date }}
 
         {% if not comment.approved_comment %}
-        <a class="btn btn-default" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-primary" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 
-        <a class="btn btn-default" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+        <a class="btn btn-primary" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
         {% endif %}
 
     </div>

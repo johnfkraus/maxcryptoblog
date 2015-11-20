@@ -32,3 +32,14 @@ class DecryptForm(forms.ModelForm):
         model = Post
         fields = ('password',)
         widgets = {'ciphertext': forms.HiddenInput()}
+
+
+class EmailForm(forms.ModelForm):
+    class Meta:
+        model = EmailMessage
+        # save_password = forms.BooleanField(label="Save password? (not recommended)")
+        fields = ('destin_email',)
+        labels = {
+            'destin_email': _('Destination email address'),
+        }
+        widgets = {'content': forms.HiddenInput()}

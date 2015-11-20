@@ -159,3 +159,24 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
+
+
+@login_required
+def post_email(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    print(lineno(), 'request.method =', request.method)
+    if request.method == "POST":
+        form = EmailForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            # post.author = request.user
+            # post.password = password
+            # post.published_date = timezone.now()
+            post.email()
+            # post.save()
+            return redirect('blog.views.post_detail', pk=post.pk)
+    else:
+        # request method equals GET
+        post = get_object_or_404(Post, pk=pk)
+        form = EmailForm(instance=post)
+    return render(request, 'blog/post_email.html', {'form': form, 'post': post})
