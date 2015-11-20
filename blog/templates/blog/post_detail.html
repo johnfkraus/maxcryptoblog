@@ -59,7 +59,7 @@
             <i class="fa fa-key fa-lg"></i>&nbsp;Decrypt 
         </a>
     {% endif %} 
-        <a title="Email this post (coming soon)" class="btn btn-primary" href="#">
+        <a title="Email this post (coming soon)" class="btn btn-primary" href="{% url 'post_email' pk=post.pk %}">
             <span class="glyphicon glyphicon-send"></span>Email
         </a>
 

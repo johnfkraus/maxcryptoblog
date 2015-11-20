@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Post, Comment
+from .models import Post, Comment, EmailMessage
 
 
 class PostForm(forms.ModelForm):
@@ -34,7 +34,7 @@ class DecryptForm(forms.ModelForm):
         widgets = {'ciphertext': forms.HiddenInput()}
 
 
-class EmailForm(forms.ModelForm):
+class EmailMessageForm(forms.ModelForm):
     class Meta:
         model = EmailMessage
         # save_password = forms.BooleanField(label="Save password? (not recommended)")

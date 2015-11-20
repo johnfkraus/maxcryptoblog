@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Post, Comment
+from .models import Post, Comment, EmailMessage
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm, CommentForm, EncryptForm, DecryptForm
+from .forms import PostForm, CommentForm, EncryptForm, DecryptForm, EmailForm
 from django.contrib.auth.decorators import login_required
 import inspect
 
@@ -163,18 +163,20 @@ def comment_remove(request, pk):
 
 @login_required
 def post_email(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    email = get_object_or_404(EmailMessage, pk=pk)
+    # post = get_object_or_404(Post, pk=pk)
     print(lineno(), 'request.method =', request.method)
     if request.method == "POST":
         form = EmailForm(request.POST, instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
+            email = form.save(commit=False)
+            # post = form.save(commit=False)
             # post.author = request.user
             # post.password = password
             # post.published_date = timezone.now()
             post.email()
             # post.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
+            return redirect('blog.views.post_email', pk=email.pk)
     else:
         # request method equals GET
         post = get_object_or_404(Post, pk=pk)

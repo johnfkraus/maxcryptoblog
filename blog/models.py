@@ -13,7 +13,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     ciphertext = models.TextField(blank=True, null=True)
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     last_update_date = models.DateTimeField(blank=True, null=True)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -113,14 +113,15 @@ class Comment(models.Model):
 class EmailMessage(models.Model):
     post = models.ForeignKey('blog.Post', related_name='emails')
     # author = models.ForeignKey('auth.User', related_name="users")
-    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="users")
+    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="senders")
     # author = models.CharField(max_length=200)
-    content = post.content  # text = models.TextField()
+    message_content = models.TextField('post.content')
+    # content = post.content  # text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
-    dest_email = models.CharField(max_length=200)
+    destin_email = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.dest_email + '; ' + self.content
+        return self.destin_email + '; ' + self.message_content
 
     def short_text(self):
         return truncatechars(self.__str__, 350)
