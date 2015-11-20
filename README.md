@@ -1,10 +1,9 @@
-# maxcryptoblog
+# Max Cryptoblog
 
-pythonanywhere
-
-Reference: http://django-allauth.readthedocs.org/en/latest/
+Max Cryptoblog is here:  https://johnfkraus.pythonanywhere.com
 
 Also: http://johnfkraus.github.io/maxcryptoblog/
+
 
 TODO:
 
