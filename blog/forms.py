@@ -9,12 +9,6 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'text',)
 
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('text',)
-
-
 class EncryptForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -32,6 +26,12 @@ class DecryptForm(forms.ModelForm):
         model = Post
         fields = ('password',)
         widgets = {'ciphertext': forms.HiddenInput()}
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
 
 
 class EmailMessageForm(forms.ModelForm):

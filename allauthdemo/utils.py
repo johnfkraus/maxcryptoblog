@@ -1,3 +1,4 @@
+# allauthdemo/utils.py
 import os
 import inspect
 import sys
@@ -42,7 +43,7 @@ def we_are_frozen():
 
 
 def module_path():
-    encoding = sys.getfilesystemencoding()
+    # encoding = sys.getfilesystemencoding()
     if we_are_frozen():
         return os.path.dirname(sys.executable)
     return os.path.dirname(__file__)

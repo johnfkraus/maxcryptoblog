@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Post, Comment, EmailMessage
+from .models import Post, Comment  # , EmailMessage
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm, CommentForm, EncryptForm, DecryptForm, EmailForm
+from .forms import PostForm, CommentForm, EncryptForm, DecryptForm, EmailMessageForm
 from django.contrib.auth.decorators import login_required
 import inspect
 
@@ -131,6 +131,21 @@ def post_decrypt(request, pk):
     return render(request, 'blog/post_decrypt.html', {'form': form, 'post': post})
 
 
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('blog.views.post_detail', pk=comment.post.pk)
+
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
+    comment.delete()
+    return redirect('blog.views.post_detail', pk=post_pk)
+
+
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -147,38 +162,29 @@ def add_comment_to_post(request, pk):
 
 
 @login_required
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('blog.views.post_detail', pk=comment.post.pk)
-
-
-@login_required
-def comment_remove(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    post_pk = comment.post.pk
-    comment.delete()
-    return redirect('blog.views.post_detail', pk=post_pk)
-
-
-@login_required
 def post_email(request, pk):
-    email = get_object_or_404(EmailMessage, pk=pk)
+    post = get_object_or_404(Post, pk=pk)
+    # email = get_object_or_404(EmailMessage, pk=pk)
     # post = get_object_or_404(Post, pk=pk)
-    print(lineno(), 'request.method =', request.method)
+    print(lineno(), 'blog/views post_email request.method =', request.method, 'request = ', request)
     if request.method == "POST":
-        form = EmailForm(request.POST, instance=post)
+        form = EmailMessageForm(request.POST)
         if form.is_valid():
-            email = form.save(commit=False)
+            emailmessage = form.save(commit=False)
+            emailmessage.post = post
+            # emailmessage.destin_email = request.destin_email
+            print('emailmessage.destin_email =', emailmessage.destin_email)
+            # , 'request.destin_email =', request.destin_email)
+            emailmessage.subject = post.title
             # post = form.save(commit=False)
-            # post.author = request.user
+            emailmessage.sender = request.user
             # post.password = password
             # post.published_date = timezone.now()
-            post.email()
-            # post.save()
-            return redirect('blog.views.post_email', pk=email.pk)
+            emailmessage.send()
+            emailmessage.save()
+            return redirect('blog.views.post_detail', pk=post.pk)
     else:
         # request method equals GET
         post = get_object_or_404(Post, pk=pk)
-        form = EmailForm(instance=post)
+        form = EmailMessageForm(instance=post)
     return render(request, 'blog/post_email.html', {'form': form, 'post': post})

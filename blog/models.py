@@ -3,6 +3,9 @@ from django.db import models
 from django.utils import timezone
 from django.template.defaultfilters import truncatechars  # or truncatewords
 import blog.encryption
+import blog.blog_mail_sender
+import allauthdemo
+from allauthdemo import settings
 # from django.contrib.auth import get_user_model as user_model
 # User = user_model()
 
@@ -19,6 +22,8 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     password = models.CharField(null=True, max_length=45)
     save_password = models.BooleanField(default=True)  # label="Save password? /(not recommended/)")
+    salt = models.BinaryField(default=allauthdemo.settings.SALT)
+    # image = models.ImageField(upload_to='images')
 
     def publish(self):
         self.published_date = timezone.now()
@@ -41,7 +46,8 @@ class Post(models.Model):
             return False
 
     def encrypt(self):
-        self.ciphertext = blog.encryption.encrypt(self.password, self.text)
+        self.salt = settings.SALT
+        self.ciphertext = blog.encryption.encrypt(self.password, self.text, self.salt)
         self.text = 'None'
         self.content = self.ciphertext
         if self.save_password is False:
@@ -111,20 +117,27 @@ class Comment(models.Model):
 
 
 class EmailMessage(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='emails')
+    post = models.ForeignKey('blog.Post', related_name='emailmessages')
     # author = models.ForeignKey('auth.User', related_name="users")
-    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="senders")
+    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="emailmessage_users")
     # author = models.CharField(max_length=200)
-    message_content = models.TextField('post.content')
+    # message_content = models.TextField('post.content')
+    message_content = models.TextField(blank=True, null=True)
     # content = post.content  # text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     destin_email = models.CharField(max_length=200)
+    subject = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
         return self.destin_email + '; ' + self.message_content
 
     def short_text(self):
         return truncatechars(self.__str__, 350)
+
+    def send(self):
+        num_messages_sent = blog.blog_mail_sender.send(self)
+        print('sent', num_messages_sent, 'email message(s)')
+        return num_messages_sent
 
 
 class Question(models.Model):
