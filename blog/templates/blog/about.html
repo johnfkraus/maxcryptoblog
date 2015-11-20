@@ -1,43 +1,67 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <div class="help">
-        <h2>About {{ APP_TITLE }}</h2>
-        <h3>
+<div class="help">
+    <h2>About {{ APP_TITLE }}</h2>
+    <h3>
         Features
-        </h3>
-        <p>
-            {{ APP_TITLE }} is a web application for blogging.  Users may encrypt blog posts with a password.  You can use a different password for each blog post.  
-            {{ APP_TITLE}} was created using the Python Django web application framework.
-        </p>
-        <p>
-            Anyone can read any published blog posts on {{ APP_TITLE }}.  
-            To create blog posts, you must sign in with a verified email address and password.  
-        </p>
-        <p>
-            Only you are allowed to read or edit your draft (unpublished) blog posts.* 
-        </p>
-        <p>
-            You can encrypt and decrypt your blog posts using a password.  You can use a different password to encrypt and decrypt each blog post.  You may opt to have {{ APP_TITLE }} save the password, but this is not recommended. 
-        </p>
-<p>
-Topics for blog post encryption, for example, might include 'What Happened in Vegas' or your Manifesto.
-</p>
-<!--   
-Topics suitable for encryption might include:
-What happened in Vegas.
-Your manifesto.
--->
-        <h3>
+    </h3>
+    <p>
+        {{ APP_TITLE }} is a web application for blogging.  Users may encrypt blog posts with a password.  You can use a different password for each blog post.  
+        {{ APP_TITLE}} was created using the Python Django web application framework.
+    </p>
+    <p>
+        Anyone can see any published blog posts on {{ APP_TITLE }}.  If a published blog post is encrypted, you can see the ciphertext. 
+        To create, encrypt and decrypt blog posts, you must sign in with a verified email address and password.  Registrants will be sent a verification email.
+    </p>
+    <p>
+        {{ APP_TITLE}} intends that your unpublished blog posts are private to you.  
+        Unless you share your unpublished blog posts (for example, via email), {{ APP_TITLE}} allows only you to see your own unpublished blog posts.  Otherwise, {{ APP_TITLE}} allows only you to see, edit, encrypt or decrypt your own draft (unpublished) blog posts.  
+    </p>
+    <p>
+        You can encrypt and decrypt your blog posts using a password.  You can use a different password to encrypt and decrypt each blog post.  You may opt to have {{ APP_TITLE }} save the password, but this is not recommended. 
+    </p>
+    <p>
+        Materials for blog post encryption might include, for example, "What Happened in Vegas", your Manifesto, or "What Really Happened During My 'Disassociative Fugure State'".
+    </p>
+
+    <h3>
         Planned features
-        </h3>
-        <p>
-            You can allow other authenticated users to read your encrypted posts if you give them the password.
-        </p>
-       <p>
-            You can email your encrypted posts.
-        </p>
+    </h3>
+    <p>
+        For users who, against our recommendation, recklessly opt to store blog post encryption passwords on the system, such password should at least be stored in encrypted form on our database.
+    </p>
+    <p>
+        You can allow other authenticated users to read your encrypted posts if you give them the password.
+    </p>
+    <p>
+        You can email your encrypted posts.
+    </p>
+    <p>
+        You can message other users.
+    </p>
+    <p>
+        Allow unregistered recipients of encrypted emailed posts to decrypt them.
+    </p>
+    <p>
+
+        Users can uploaded and encrypted documents and images, including PDFs.
+    </p>
+    <p>
+
+        Emailed posts can be in the form of email attachments.
+    </p>
+    <p>
+
+        Limit number of emails sent from the app by each free user.
+    </p>
+    <p>
+
+        Limit the length of emailed posts.  Does anyone really need to email all of Henry James' The Ambassadors?
+    </p>
+    <p>
+
         <h3>
-        Cryptograpy
+            Cryptograpy
         </h3>
         <p>
             {{ APP_TITLE}} uses symmetric (“secret key”) authenticated cryptography, specifically the Fernet implementation in the Python  <a href="https://cryptography.io/" target="_blank"> Cryptography</a> library.  The Fernet implementation is said to guarantee that a message encrypted using Fernet cannot be manipulated or read without the key.  The protection may be undermined, however it the user employs a weak encryption password.
@@ -60,7 +84,10 @@ Your manifesto.
         </p>
         <h3 style="color: red;">Caution</h3>
         <p>
-            This instance of {{ APP_TITLE }} is in the early development (alpha) stage and is virtually untested.  {{ APP_TITLE }} is not ready for production usage.  At this time long-term maintenance of user accounts or content is impossible.  The security and privacy of any information stored on the current version of {{ APP_TITLE }} is  uncertain.  Enjoy!
+            This instance of {{ APP_TITLE }} is in the early (alpha) development stage and is virtually untested.  {{ APP_TITLE }} is not ready for production usage.  Use {{ APP_TITLE }} for experiments and entertainment only.  
+             At this time assurance of long-term maintenance of user accounts or content is impossible.  The security and privacy of any information stored on the current version of {{ APP_TITLE }} is uncertain.  Account passwords are hashed, of course.  
+
+            Computer system administrators/developers and probably some hackers are capable of viewing your information.  The system is designed such that (1) passwords that you use to encrypt your content are not stored on the system unless you choose to save them (against our recommendation); and (2) when you encrypt your content, the plaintext is discarded.  The integrity of the system cannot be guaranteed, however.  Your content is transmitted over the public Internet with the associated risk of interception.  Employ additional layers of security <a href="https://www.torproject.org" target="_blank"> (example)<a>.  {{ APP_TITLE }} may be unsuitable for sensitive content.  Trust no one.  Enjoy!
         </p>
         <!--
         <h3 style="color: red;">Crippled Web Browsers</h3>
@@ -68,11 +95,11 @@ Your manifesto.
         <p>
             If you are using the consistently dysfunctional Internet Explorer web browser, too bad for you.  IE permits further degradation of the user experience by allowing the download of fonts to be blocked.  These fonts are required for the site to function and also make the web site look pretty.  If you are browing on your work computer and your workplace has further broken your lame IE browser by blocking font download, use Google Chrome or Firefox, and never use IE again.
         </p>
--->
-        <hr>
-        <p>
-            {{ APP_TITLE}} is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
-        </p>
-        <hr>
-    </div>
+    -->
+    <hr>
+    <p>
+        {{ APP_TITLE}} is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
+    </p>
+    <hr>
+</div>
 {% endblock %}
