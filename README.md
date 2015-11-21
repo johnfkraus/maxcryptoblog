@@ -20,3 +20,5 @@ Limit the length of emailed posts.  Does anyone really need to email all of Henr
 Notify administrator by email of new user registrations, conditions on the server, etc.
 
 Format app title for emphasis.
+
+Add cool background images, like a one-time pad image.

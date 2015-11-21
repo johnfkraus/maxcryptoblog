@@ -36,7 +36,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauthdemo.auth',
     'allauthdemo.demo',
+    # 'shell_plus',
 )
+
+print(type(INSTALLED_APPS))
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -87,8 +90,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-TEMPLATES = [
-    {
+TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': [
         # allauth templates: you could copy this directory into your
@@ -119,10 +121,9 @@ TEMPLATES = [
             # allauth specific context processors
             # 'allauth.account.context_processors.account',
             # 'allauth.socialaccount.context_processors.socialaccount',
-          ],
-       },
-    }
-]
+        ],
+    },
+}]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

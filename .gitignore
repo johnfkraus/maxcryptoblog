@@ -1,3 +1,7 @@
+doc
+doc/*
+*.sublime-workspace
+*.sublime-project
 */settings_email.py
 */settings_cryptoblog.py
 */settings_secret.py
@@ -24,6 +28,7 @@ DEL
 mypy*
 myvenv
 *.secret.txt
+*/*.secret.txt
 */*.deleteme
 *.deleteme
 */*.zip
@@ -34,5 +39,4 @@ myvenv
 postgres-cheatsheet.md
 *.*~
 */*.*~
-
-
+Rakefile
