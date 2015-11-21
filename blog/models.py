@@ -117,19 +117,19 @@ class Comment(models.Model):
 
 
 class EmailMessage(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='emailmessages')
+    post = models.ForeignKey('blog.Post', related_name='post_emailmessages')
     # author = models.ForeignKey('auth.User', related_name="users")
-    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="emailmessage_users")
+    sender = models.ForeignKey('allauthdemo_auth.DemoUser', related_name="sender_emailmessages")
     # author = models.CharField(max_length=200)
     # message_content = models.TextField('post.content')
-    message_content = models.TextField(blank=True, null=True)
+    message_content = models.TextField(default='Empty')
     # content = post.content  # text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     destin_email = models.CharField(max_length=200)
     subject = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
-        return self.destin_email + '; ' + self.message_content
+        return 'date = ', str(self.created_date) + '; destin_email = ' + self.destin_email + '; content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '\n'
 
     def short_text(self):
         return truncatechars(self.__str__, 350)
@@ -138,6 +138,24 @@ class EmailMessage(models.Model):
         num_messages_sent = blog.blog_mail_sender.send(self)
         print('sent', num_messages_sent, 'email message(s)')
         return num_messages_sent
+
+    def created_in_last_day(self):
+        mytdelta = datetime.timedelta(-1, 0, 0)  # Interval of -1 day and 0.0 seconds
+        not_since_time = datetime.datetime.now() + mytdelta
+        print('not_since_time=', not_since_time)
+        if self.created_date > not_since_time:
+            return 1
+        else:
+            return 0
+
+    def created_in_last_week(self):
+        create_time = self.created_date.replace(tzinfo=utc)
+        minus_seven_days = datetime.timedelta(-7, 0, 0)  # Interval of -1 day and 0.0 seconds
+        seven_days_ago = datetime.datetime.now() + minus_seven_days
+        if create_time > seven_days_ago:
+            return 1
+        else:
+            return 0
 
 
 class Question(models.Model):

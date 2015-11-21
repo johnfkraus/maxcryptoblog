@@ -124,6 +124,9 @@ class DemoUser(AbstractBaseUser, PermissionsMixin):
     def natural_key(self):
         return (self.email,)
 
+    def sent_emailmessages_count(self):
+        return self.sender_emailmessages.count()
+
     def emailmessage_count(self):
         return self.emailmessage.count()
 
