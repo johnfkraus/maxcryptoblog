@@ -1,5 +1,5 @@
 import hashlib
-
+import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.encoding import python_2_unicode_compatible
@@ -127,8 +127,11 @@ class DemoUser(AbstractBaseUser, PermissionsMixin):
     def sent_emailmessages_count(self):
         return self.sender_emailmessages.count()
 
-    def emailmessage_count(self):
-        return self.emailmessage.count()
+    def emailmessages_last_days(self, days):
+        mydate = timezone.now() + datetime.timedelta(-days, 0, 0)
+        return self.sender_emailmessages.filter(created_date__gte=mydate)
+
+
 
 
 @python_2_unicode_compatible

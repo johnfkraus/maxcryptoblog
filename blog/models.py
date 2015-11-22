@@ -129,7 +129,8 @@ class EmailMessage(models.Model):
     subject = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
-        return 'date = ', str(self.created_date) + '; destin_email = ' + self.destin_email + '; content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '\n'
+        summary = 'date = ' + str(self.created_date) + '; destin_email = ' + self.destin_email + '; content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '; age = ' + str(timezone.now() - self.created_date) + '\n'
+        return summary
 
     def short_text(self):
         return truncatechars(self.__str__, 350)
@@ -139,23 +140,45 @@ class EmailMessage(models.Model):
         print('sent', num_messages_sent, 'email message(s)')
         return num_messages_sent
 
-    def created_in_last_day(self):
-        mytdelta = datetime.timedelta(-1, 0, 0)  # Interval of -1 day and 0.0 seconds
-        not_since_time = datetime.datetime.now() + mytdelta
-        print('not_since_time=', not_since_time)
-        if self.created_date > not_since_time:
+    def created_in_last_day_count(self):
+        # create_time = self.created_date.replace(tzinfo=utc)
+        # minus_one_day = datetime.timedelta(-1, 0, 0)  # Interval of -1 day and 0.0 seconds
+        one_day_ago = timezone.now() + datetime.timedelta(-1, 0, 0)
+        if self.created_date > one_day_ago:
             return 1
         else:
             return 0
 
-    def created_in_last_week(self):
-        create_time = self.created_date.replace(tzinfo=utc)
-        minus_seven_days = datetime.timedelta(-7, 0, 0)  # Interval of -1 day and 0.0 seconds
-        seven_days_ago = datetime.datetime.now() + minus_seven_days
-        if create_time > seven_days_ago:
+    def created_in_last_week_count(self):
+        # create_time = self.created_date.replace(tzinfo=utc)
+        # minus_seven_days = datetime.timedelta(-7, 0, 0)  # Interval of -7 days and 0.0 seconds
+        seven_days_ago = timezone.now() + datetime.timedelta(-7, 0, 0)
+        if self.created_date > seven_days_ago:
             return 1
         else:
             return 0
+
+    def created_in_last_days(self, days):
+        # create_time = self.created_date.replace(tzinfo=utc)
+        # minus_one_day = datetime.timedelta(-days, 0, 0)  # Interval of -1 day and 0.0 seconds
+        # one_day_ago = datetime.datetime.now() + datetime.timedelta(-days, 0, 0)
+        if self.created_date > (timezone.now() + datetime.timedelta(-days, 0, 0)):
+            return True
+        else:
+            return False
+
+    def age(self):
+        age = timezone.now() - self.created_date
+        return age
+
+    def age_lte_days(self, days):
+        # create_time = self.created_date.replace(tzinfo=utc)
+        # minus_one_day = datetime.timedelta(-days, 0, 0)  # Interval of -1 day and 0.0 seconds
+        # one_day_ago = datetime.datetime.now() + datetime.timedelta(-days, 0, 0)
+        if self.created_date > (timezone.now() + datetime.timedelta(-days, 0, 0)):
+            return True
+        else:
+            return False
 
 
 class Question(models.Model):
