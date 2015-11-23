@@ -176,6 +176,7 @@ def post_email(request, pk):
             print('emailmessage.destin_email =', emailmessage.destin_email)
             # , 'request.destin_email =', request.destin_email)
             emailmessage.subject = post.title
+            emailmessage.message_content = post.get_content()
             # post = form.save(commit=False)
             emailmessage.sender = request.user
             # post.password = password

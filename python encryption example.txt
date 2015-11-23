@@ -1,0 +1,245 @@
+python encryption example.txt
+
+http://stevenwooding.com/python-example-encryption-using-aes-in-counter-mode/
+
+Steven Wooding
+
+Python example: Encryption using AES in Counter Mode
+31 July 2015 on Security, Python
+
+While doing a course on cybersecurity (yeah, academia still use the word cyber), I found the need to write an encryption module in Python that would safely protect a file on disk. I won't mention the course here. Don't want to make it too easy for future students. However, I am going to post my code as I didn't really find a complete solution when looking on the web. Just the individual components. Since it is really easy to screw up encryption code, I thought I would post the correct (hopefully anyway) of doing it.
+
+In fact, while reviewing code again before publishing I found a really bad bug in my code, so be warned. On the plus side, the code has been bashed on by 150 people for two weeks during the course and it survived unscathed.
+
+So here is the full module. I'll explain the functions in the order they appear, after the code.
+
+# This is a module for writing and reading the log file securely.
+# For encryption, I use AES in counter mode.
+# For authentication, I use a keyed HMAC with the SHA256 hash function.
+# For key derivation, I use the PBKDF2 algorithm, with a random salt. 
+# Author: Steven Wooding
+from os import urandom
+import zlib
+
+from Crypto.Hash import HMAC
+from Crypto.Hash import SHA256
+from Crypto.Cipher import AES
+from Crypto.Util import Counter
+from Crypto.Protocol.KDF import PBKDF2
+
+
+class IntegrityViolation(Exception):
+    pass
+
+
+def generate_keys(seed_text, salt):
+    # Use the PBKDF2 algorithm to obtain the encryption and hmac key
+    full_key = PBKDF2(seed_text, salt, dkLen=64, count=1345)
+
+    # Take the first half of this hash and use it as the key
+    # to encrypt the plain text log file. encrypt_key is 256 bits
+    encrypt_key = full_key[:len(full_key) / 2]
+
+    # Use the last half as the HMAC key
+    hmac_key = full_key[len(full_key) / 2:]
+
+    return encrypt_key, hmac_key
+
+
+# This function securely writes the log file to disk using
+# authenticated encryption.
+def write_logfile(log_filename, auth_token, logfile_pt):
+    # Compress the plaintext log file
+    logfile_pt = zlib.compress(logfile_pt, 5)
+
+    # Generate the encryption and hmac keys from the token,
+    # using a random salt
+    rand_salt = urandom(16)
+    logfile_ct = rand_salt
+    encrypt_key, hmac_key = generate_keys(auth_token, rand_salt)
+
+    # Set-up the counter for AES CTR-mode cipher
+    ctr_iv = urandom(16) # AES counter block is 128 bits (16 bytes)
+    ctr = Counter.new(128, initial_value=long(ctr_iv.encode('hex'), 16))  
+    logfile_ct = logfile_ct + ctr_iv
+
+    # Create the cipher object
+    cipher = AES.new(encrypt_key, AES.MODE_CTR, counter=ctr)
+
+    # Encrypt the plain text log and add it to the logfile cipher text
+    # which currently contains the IV for AES CTR mode
+    logfile_ct = logfile_ct + cipher.encrypt(logfile_pt)
+
+    # Use the 2nd half of the hashed token to sign the cipher text
+    # version of the log file using a MAC (message authentication code)
+    hmac_obj = HMAC.new(hmac_key, logfile_ct, SHA256)
+    mac = hmac_obj.digest()
+
+    # Add the mac to the encrypted log file
+    logfile_ct = logfile_ct + mac
+
+    # Write the signed and encrypted log file to disk.
+    # The caller should handle an IO exception
+    with open(log_filename, 'wb') as f:
+        f.write(logfile_ct)
+
+    return None
+
+
+# This function securely reads the log file from disk using
+# authenticated encryption
+def read_logfile(log_filename, auth_token):
+    # Read in the encrypted log file. Caller should handle IO exception
+    with open(log_filename, 'rb') as f:
+        logfile_ct = f.read()
+
+    # Extract the hmac salt from the file
+    hmac_salt = logfile_ct[:16]
+
+    # Generate the encryption and hmac keys from the token
+    encrypt_key, hmac_key = generate_keys(auth_token, hmac_salt)
+
+    # Set the mac_length
+    mac_length = 32
+
+    # Extract the MAC from the end of the file
+    mac = logfile_ct[-mac_length:]
+
+    # Cut the MAC off of the end of the ciphertext
+    logfile_ct = logfile_ct[:-mac_length]
+
+    # Check the MAC
+    hmac_obj = HMAC.new(hmac_key, logfile_ct, SHA256)
+    computed_mac = hmac_obj.digest()
+
+    if computed_mac != mac:
+        # The macs don't match. Raise an exception for the caller to handle.
+        raise IntegrityViolation()
+
+    # Cut the HMAC salt from the start of the file
+    logfile_ct = logfile_ct[16:]
+
+    # Decrypt the data
+
+    # Recover the IV from the ciphertext
+    ctr_iv = logfile_ct[:16]  # AES counter block is 128 bits (16 bytes)
+
+    # Cut the IV off of the ciphertext
+    logfile_ct = logfile_ct[16:]
+
+    # Create and initialise the counter
+    ctr = Counter.new(128, initial_value=long(ctr_iv.encode('hex'), 16))
+
+    # Create the AES cipher object and decrypt the ciphertext
+    cipher = AES.new(encrypt_key, AES.MODE_CTR, counter=ctr)
+    logfile_pt = cipher.decrypt(logfile_ct)
+
+    # Decompress the plain text log file
+    logfile_pt = zlib.decompress(logfile_pt)
+
+    return logfile_pt
+
+# Module test harness for standalone testing. Just run this script
+# with python logfileio.py
+if __name__ == "__main__":
+
+    # Define a filename to work with during the test
+    filename = 'encrypted.dat'
+
+    # Define some plain text to put into the encrypt file
+    plain_text = ('Yet across the gulf of space, minds that are to our '
+                  'minds as ours are to those of the beasts that '
+                  'perish, intellects vast and cool and unsympathetic, '
+                  'regarded this earth with envious eyes, and slowly '
+                  'and surely drew their plans against us.\n\n'
+                  'H. G. Wells (1898), The War of the Worlds\n')
+
+    # Define a secret token
+    token = 'TheWaroftheWorlds'
+
+    # Call the function to authenticate and encrypt the plain text
+    try:
+        write_logfile(filename, token, plain_text)
+    except EnvironmentError:
+        # Includes IOError, OSError and WindowsError (if applicable)
+        print "Error writing file to disk"
+        raise SystemExit(5)
+    except ValueError:
+        print "ValueError exception raised"
+        raise SystemExit(2)
+
+    # Call the function to authenticate and decrypt the encrypted file
+    try:
+        recovered_plain_text = read_logfile(filename, token)
+    except EnvironmentError:
+        # Includes IOError, OSError and WindowsError (if applicable)
+        print "Error reading file from disk"
+        raise SystemExit(5)
+    except IntegrityViolation:
+        print "Error authenticating the encrypted file"
+        raise SystemExit(9)
+
+    # Check that the original plain text is the same as the
+    # recovered plain text.
+    try:
+        assert (plain_text == recovered_plain_text)
+    except AssertionError:
+        print "Original plain text is different from decrypted text."
+        raise SystemExit(10)
+    else:
+        print "Encryption/decryption cycle test completed successfully!"
+
+Code explanation
+Imported modules
+
+The urandom module is used to provide a source of random numbers. zlib is used to compress the plaintext before encryption. If you are going to use compression with encryption, it is very important first compress then encrypt the plaintext. Encryption turns the plaintext into a random blob of bytes. Compression works by storing the structure of data. If there is no structure, compression will not work.
+
+I use the standard Python cryptography library Crypto. Full documentation can be found here. The HMAC and SHA256 modules are used to create a keyed-hash message authentication code (HMAC). This protects the encrypted file from modification by an attacker. The AES module is the module that does the actual encryption of the data. The Counter module handles the counting for AES in counter mode. Finally, the PBKDF2 module is used to derive the encryption and HMAC key from the user provided password.
+
+One extra thing before moving on to the functions, I implemented a custom exception that is triggered if the encrypted file has been modified by a 3rd party. This can be used to handle these situation and example of this in in the test harness at the end of the code.
+generate_keys()
+
+I use the PBKDF2 algorithm to securely generate a large 512 bit key (64 bytes). The count variable is basically the number of hashes used in the algorithm. The higher the number, the longer key generation will take. This can therefore be used to rate limit an offline brute force attack on the user provided password. In a closed source environment, it is best to use a non-obviously number here, to keep an attacker guessing.
+
+I then take the first half of the key and use that as the Advanced Encryption Standard (AES) encryption key. The second half will be used as a key to the HMAC function.
+write_logfile()
+
+This function writes a secure log file. It takes in a filename to write to (log_filename), a password (auth_token) and the plaintext (logfile_pt). It first compresses the plaintext. Not much to say about that.
+
+Next the encryption and HMAC keys are generated from the password. A random salt is generated and used in the PBKDF2 algorithm. This is used to defend against rainbow table attacks. It basically means, even if the user provides the same password, a completely different set of keys is generated each time. The final output logfile_ct begins with this random salt.
+
+The initial state of the counter is then randomly generated and the counter object is created. The initial state of the counter is added to logfile_ct.
+
+Next the AES cipher object is created. Counter (CTR) mode is used. Just a few words on why I chose CTR mode. It basically turns a block cipher into a stream cipher and therefore needs no padding. This nicely avoids padding based ciphertext attacks and takes away one thing that the end programmer could screw up. It can also be sped up on multiprocessor machines, unlike Cipher Block Chaining (CBC) mode, which needs to be done sequentially.
+
+The data is encrypted and the resulting ciphertext is added to the output logfile_ct.
+
+Next the HMAC object is created, using the generated HMAC key and the output we are protecting logfile_ct. It is told to use the SHA256 hash function as the basis of the HMAC. The message authentication code (MAC) is calculated and added to the end of the encrypted log file logfile_ct. The output is then written to disk.
+read_logfile()
+
+This function is basically the reverse of write_logfile(). Given the same password auth_token, it will turn the encrypted text back to the original plain text. It also does the all important check to see if the encrypted data has been tampered with in any way.
+
+So the file is read in from disk. The HMAC salt is extracted and the generate_keys() function is run. The MAC is extracted and chopped off the end of the file. The HMAC is then generated as before on the remaining data. Then this generated HMAC is compared with the one that was extracted from the file. If they don't match, an IntegrityViolation exception is thrown.
+
+If you end up playing with this code, you can try the following. Create an encrypted file with the write_logfile() function. Then change one of the bytes in the file (you'll need something that can edit binary files. If you make even the slightest change to any part of the encrypted file, read_logfile() will detect it and reject the file.
+
+The code then proceeds to decrypt the file and uncompress it, returning whatever the user gave it in the first place. Job done.
+Test harness
+
+The rest of the code under the line if __name__ == "__main__": is a test harness for the module and also gives an example of how to use the module.
+Conclusion
+
+So there we have it. A nice clean example of authenticated encryption using AES in counter mode written in Python. Use it how you see fit. Warning: May contain bugs. Thanks for your interest.
+Steven Wooding
+
+Formula One | Photography | Wildlife | Science | Technology
+Southampton, UK. http://www.twitter.com/EmpireSteve
+Share this post
+The killer feature of smartphones
+
+BSP - Before Smartphones The year is 1999 and I'm a physics student living in Germany. My German was…
+What if Sky owned a stake in F1?
+
+Rumours are circulating that Sky are considering being part of a consortium, along with Liberty Global, to bid for…
+Steven Wooding © 2015
+Proudly published with Ghost

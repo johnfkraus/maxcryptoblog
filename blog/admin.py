@@ -1,8 +1,10 @@
+# maxcryptoblog/blog/admin
+
 from django.contrib import admin
 
 from django.contrib.sites.models import Site
 
-from .models import Post, Comment, Question, Choice
+from .models import Post, Comment, EmailMessage, Question, Choice
 
 
 class ChoiceInline(admin.TabularInline):
@@ -30,6 +32,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['approved_comment', 'author', 'created_date']
 
 
+class EmailMessageAdmin(admin.ModelAdmin):
+    list_display = ('destin_email', 'sender', 'subject', '__str__')
+    list_filter = ['sender', 'created_date']
+
+
 class SiteAdmin(admin.ModelAdmin):
     """ ADDING the id to the displayed values """
     list_display = ('id', 'domain', 'name')
@@ -39,6 +46,7 @@ class SiteAdmin(admin.ModelAdmin):
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(EmailMessage, EmailMessageAdmin)
 
 
 admin.site.unregister(Site)

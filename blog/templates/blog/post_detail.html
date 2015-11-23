@@ -12,9 +12,16 @@
         </p>
         <!--user: {{ user }}
         post.author: {{ post.author }} -->
-        {% ifequal user post.author %}
-            <a title="Unpublished this published post" class="btn btn-primary" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
-        {% endifequal %}
+        {% if user.is_authenticated  %}
+
+        <a title="Email this post" class="btn btn-primary" href="{% url 'post_email' pk=post.pk %}">
+            <span class="glyphicon glyphicon-send"></span>Email
+        </a>
+
+            {% ifequal user post.author %}
+                <a title="Unpublished this published post" class="btn btn-primary" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
+            {% endifequal %}
+        {% endif %}
     {% else %}
         <div class="date">
            created: {{ post.created_date }}
@@ -30,16 +37,15 @@
     {% if user.is_authenticated  %}
         {% ifequal user post.author %}
             {% if not post.is_encrypted %}
-                <a title="Edit your post" class="btn btn-primary" href="{% url "post_edit" pk=post.pk %}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
+            <a title="Edit your post" class="btn btn-primary" href="{% url "post_edit" pk=post.pk %}">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
             {% endif %}    
-        {% endifequal %}
-
-        {% ifequal user post.author %}
-        <a title="Delete this post" class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">
-            <span class="glyphicon glyphicon-remove"></span>Delete
-        </a>
+        <!-- { % endifequal % }
+        { % ifequal user post.author % }  -->
+            <a title="Delete this post" class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">
+                <span class="glyphicon glyphicon-remove"></span>Delete
+            </a>
         {% endifequal %}
     {% else %}
         <a title="Login" href="{% url "account_login" %}" class="top-menu">
@@ -48,7 +54,7 @@
     {% endif %}
 
     {% ifequal user post.author %}
-    {% if not post.is_encrypted %}
+        {% if not post.is_encrypted %}
 
         <a title="Encrypt this post" class="btn btn-primary" href="{% url 'post_encrypt' pk=post.pk %}">
             <i class="fa fa-lock fa-lg"></i>&nbsp;Encrypt 
@@ -58,11 +64,12 @@
         <a title="Decrypt this post" class="btn btn-primary" href="{% url 'post_decrypt' pk=post.pk %}">
             <i class="fa fa-key fa-lg"></i>&nbsp;Decrypt 
         </a>
-    {% endif %} 
-        <a title="Email this post (coming soon)" class="btn btn-primary" href="{% url 'post_email' pk=post.pk %}">
+        {% endif %} 
+        <!--
+        <a title="Email this post" class="btn btn-primary" href="{   % url 'post_email' pk=post.pk %  }">
             <span class="glyphicon glyphicon-send"></span>Email
         </a>
-
+    -->
     {% endifequal %}
 
     <h2 class="blog-post-title">{{ post.title }}</h2>
@@ -70,18 +77,12 @@
     {% if not post.is_encrypted %}
     <h4>Plaintext:</h4>
     <div class="plaintext">
-
         {{ post.text|linebreaks }}
-
     </div>
     {% else %}
     <h4>Ciphertext:</h4>
     <div class="ciphertext">
-    <!--p class="ciphertext"-->
-
         {{ post.ciphertext|linebreaks }}
-    
-    <!--/p-->
     </div>
     {% endif %}
 </div><!-- /post -->

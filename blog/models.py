@@ -1,3 +1,4 @@
+# maxcryptoblog/blog/models.py
 import datetime
 from django.db import models
 from django.utils import timezone
@@ -129,7 +130,7 @@ class EmailMessage(models.Model):
     subject = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
-        summary = 'date = ' + str(self.created_date) + '; destin_email = ' + self.destin_email + '; content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '; age = ' + str(timezone.now() - self.created_date) + '\n'
+        summary = 'date = ' + str(self.created_date) + '; destin_email = ' + self.destin_email + '; message_content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '; age = ' + str(timezone.now() - self.created_date) + '\n'
         return summary
 
     def short_text(self):
