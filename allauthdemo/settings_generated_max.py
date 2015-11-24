@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-print('BASE_DIR = ', BASE_DIR)
+# print('BASE_DIR = ', BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     # 'shell_plus',
 )
 
-print(type(INSTALLED_APPS))
+# print(type(INSTALLED_APPS))   class: tuple
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

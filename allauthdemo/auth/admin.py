@@ -11,6 +11,7 @@ except ImportError:
 
 from .models import DemoUser, UserProfile
 from .forms import DemoUserAdminForm
+from blog.models import Post, Comment, EmailMessage
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -26,6 +27,18 @@ class UserProfileAdminInline(admin.TabularInline):
     model = UserProfile
 
 
+class EmailMessageInline(admin.TabularInline):
+    model = EmailMessage
+
+
+class PostInline(admin.TabularInline):
+    model = Post
+
+
+class CommentInline(admin.TabularInline):
+    model = Comment
+
+
 class DemoUserAdmin(UserAdmin):
     """The project uses a custom User model, so it uses a custom User admin model.
     Some related notes at:
@@ -36,6 +49,9 @@ class DemoUserAdmin(UserAdmin):
 
     inlines = [
         UserProfileAdminInline,
+        EmailMessageInline,
+        PostInline,
+        CommentInline,
     ]
 
     # readonly_fields = ('private_uuid', 'public_id')
@@ -46,7 +62,7 @@ class DemoUserAdmin(UserAdmin):
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        #(_('Ids'), {'fields': ('private_uuid', 'public_id')}),
+        # (_('Ids'), {'fields': ('private_uuid', 'public_id')}),
     )
 
     add_fieldsets = (

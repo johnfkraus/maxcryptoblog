@@ -33,7 +33,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class EmailMessageAdmin(admin.ModelAdmin):
-    list_display = ('destin_email', 'sender', 'subject', '__str__')
+    list_display = ('destin_email', 'sender', 'subject', 'age', '__str__')
     list_filter = ['sender', 'created_date']
 
 

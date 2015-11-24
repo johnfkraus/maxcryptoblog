@@ -1,0 +1,611 @@
+http://ask-leo.com/how_do_i_send_encrypted_email.html
+
+Ask Leo! by Leo A. Notenboom
+How do I send encrypted email?
+
+by Leo A. Notenboom, © 2006
+
+I need to have a client send me some very sensitive information. Really really sensitive. I know that email is fundamentally insecure, so I want the email to be encrypted. What's the best way to do that. Did I mention it's sensitive?
+
+You are correct in noting the email is, at it's very core, insecure. An administrator on any of the systems between sender and recipient can quite easily look at any email that traverses their server. Similarly, networks can be sniffed, and email passing by can be easily read.
+
+I'm not trying to scare you, because that kind of reading is very rare, and typically very benign. Let's face it, most people don't really care about your email, I'm sorry to say.
+
+But what if even that small risk is unacceptable?
+
+Then we encrypt.
+
+I want to start by pointing out that there are several ways to encrypt data, and several tools that can be added to mail programs that might even do it for you. There are many good solutions out there. Sadly, not all are compatible with each other. So rather than enumerate a list of add-ons for various mail programs, and include some kind of matrix of compatibility, I'm going to get just a little geeky, and talk about encrypting by hand, using the underlying technology that many, though not all, of those tools use: Gnu Privacy Guard, or GPG.
+
+This technique works with all mail programs.
+
+Public Key Encryption
+
+When we talk about encryption, the first approach that typically comes to mind is password or phrase encryption. With those techniques, a password is used to encrypt the data, and then must be supplied again to decrypt it. The data without the password is theoretically useless, but anyone with the password can decrypt it.
+
+Public Key encryption uses a different style of algorithm. To begin with, you'll generate two matching "keys"; a public key, and a private key. The characteristics of these keys is such that data encrypted with one can only be decrypted with the other.
+
+That's important. Make sure you get it. By generating a public/private key pair, someone can encrypt data using the public key that can only be decrypted using the associated private key. If all you have is the public key, you can't even decrypt what you've just encrypted.
+
+As an example, you'll find my public key here. Anyone who wants to encrypt data that only I can decrypt would use that key. I keep the associated private key ... well, I keep that private. When I need to decrypt something that has been encrypted with my public key, I use my matching private key to do so.
+
+Naturally there's a lot more to it, but those are the basics.
+
+Getting GPG
+
+GPG is free software, under the GNU General Public License. You can download it, and find documentation for it, on the GnuPG web site. It's available for many platforms, and often comes preinstalled on various Linux distributions. Windows users can download binaries directly from the GPG download page.
+
+GPG is a command-line tool. That means once installed, you'll need to open a Windows Command Prompt and run the tool from there. It's perhaps easiest to simply "CD" to the directory containing the GPG executables. Alternately you can copy all the "G*.exe" executables to a different directory already on your PATH.
+
+Run "gpg" once, and it will create it's storage location for keys, which it refers to as your "key ring".
+
+Creating a key pair
+
+The intended recipient needs to generate a public/private key pair.
+
+In the Windows Command Prompt, enter gpg --gen-key. In the following sequence, your responses are in bold:
+
+    gpg (GnuPG) 1.4.2.2; Copyright (C) 2005 Free Software Foundation, Inc.
+    This program comes with ABSOLUTELY NO WARRANTY.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions. See the file COPYING for details.
+
+    Please select what kind of key you want:
+       (1) DSA and Elgamal (default)
+       (2) DSA (sign only)
+       (5) RSA (sign only)
+    Your selection? ENTER to accept the default
+    DSA keypair will have 1024 bits.
+    ELG-E keys may be between 1024 and 4096 bits long.
+    What keysize do you want? (2048) ENTER to accept the default
+    Requested keysize is 2048 bits
+    Please specify how long the key should be valid.
+             0 = key does not expire
+          <n>  = key expires in n days
+          <n>w = key expires in n weeks
+          <n>m = key expires in n months
+          <n>y = key expires in n years
+    Key is valid for? (0) ENTER to accept the default
+    Key does not expire at all
+    Is this correct? (y/N) Y
+
+    You need a user ID to identify your key; the software constructs the user ID
+    from the Real Name, Comment and Email Address in this form:
+        "Heinrich Heine (Der Dichter) <heinrichh@duesseldorf.de>"
+
+    Real name: Leo A. Notenboom (Use your own name)
+    Email address: example@ask-leo.com (Use your own email address)
+    Comment: ENTER to accept the default
+    You selected this USER-ID:
+        "Leo A. Notenboom <leo@ask-leo.com>"
+
+    Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+    You need a Passphrase to protect your secret key.
+    Passphrase: Enter a passphrase to further protect your private key
+
+    We need to generate a lot of random bytes. It is a good idea to perform
+    some other action (type on the keyboard, move the mouse, utilize the
+    disks) during the prime generation; this gives the random number
+    generator a better chance to gain enough entropy.
+
+    (Random characters appear here as they key is generated.)
+
+    gpg: key 874A3EC1 marked as ultimately trusted
+    public and secret key created and signed.
+
+    gpg: checking the trustdb
+    gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+    gpg: depth: 0  valid:   2  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 2u
+    pub   1024D/874A3EC1 2006-03-08
+          Key fingerprint = 8A4F 770F D037 D414 F4E6  B95C 6E89 72A3 874A 3EC1
+    uid                  Leo A. Notenboom <example@ask-leo.com>
+    sub   2048g/1B917E56 2006-03-08
+
+At this point your secret key and your public key have been generated, and placed on your keyring.
+
+In order to get the public key to the person who wants to encrypt your data, you'll need to export it:
+
+    c:\>gpg -a --export example@ask-leo.com >mykey.pub
+
+This created "mykey.pub", a text file that contains your public key. You can now mail this to the person who's going to encrypt data to be sent to you, or post it publicly if you like.
+
+Encrypting Data
+
+In order to encrypt data, the sender will have to install GPG as above. They don't need to create their own public/private keypair in order to encrypt your data. All they need is the public key you created above, and made available to them somehow.
+
+They start by "importing" your public key onto their keyring:
+
+    c:\>gpg --import mykey.pub
+    gpg: key 874A3EC1: public key "Leo A. Notenboom <example@ask-leo.com>" imported
+    gpg: Total number processed: 1
+    gpg:               imported: 1
+
+Now they're ready to encrypt. That looks like this (encrypting the example file "example.xls"):
+
+    c:\>gpg -a --encrypt -r example@ask-leo.com example.xls
+    gpg: 1B917E56: There is no assurance this key belongs to the named user
+
+    pub  2048g/1B917E56 2006-03-08 Leo A. Notenboom <example@ask-leo.com>
+     Primary key fingerprint: 8A4F 770F D037 D414 F4E6  B95C 6E89 72A3 874A 3EC1
+          Subkey fingerprint: 215A 55C8 C88A 2587 4E64  995C 5EFC 7E3F 1B91 7E56
+
+    It is NOT certain that the key belongs to the person named
+    in the user ID.  If you *really* know what you are doing,
+    you may answer the next question with yes.
+
+    Use this key anyway? (y/N) y
+
+Note the dire warning about making sure you know who's key you're dealing with. There are ways to confirm and avoid this message, but for now to keep things simple, we'll simply note that the Primary Key fingerprint listed here matches the fingerprint that was listed when you created the key, and answer "Yes".
+
+The result of this example operation is "example.xls.asc". This text file is your encrypted data. You can email it with confidence to the intended recipient, knowing that only they can decrypt it with their matching private key.
+
+Decrypting Data
+
+So you've passed your public key to the sender, they've used it to encrypt your sensitive data, and have emailed you the encrypted results. From your mail client, save the encrypted data to a text file - it's ok to leave headers and such in the file, the decryption program will ignore it.
+
+To decrypt, you'll do this:
+
+    c:\>gpg -o example.xls --decrypt example.xls.asc
+
+    You need a passphrase to unlock the secret key for
+    user: "Leo A. Notenboom <example@ask-leo.com>"
+    2048-bit ELG-E key, ID 1B917E56, created 2006-03-08 (main key ID 874A3EC1)
+
+    gpg: encrypted with 2048-bit ELG-E key, ID 1B917E56, created 2006-03-08
+          "Leo A. Notenboom <example@ask-leo.com>"
+
+The "-o" parameter specifies the name of the decrypted file to create. Note that you still needed to enter the passphrase for your private key. This has nothing to do with the data you are decrypting, but rather is an additional layer of protection on your private key. Without a passphrase (which is possible), anyone who gains access to your private key would be able to decrypt any messages intended for you.
+
+•
+
+Security
+
+•
+
+It's that last point that is perhaps the most important, and that I want to emphasize. Your private key is this technique's weakest link. If your private key is compromised ... meaning that an unauthorized person gets a copy, and is able to guess or get the passphrase on it ... then your security has been breached.
+
+For simple use cases such as this example, you'd simply generate a new key pair, and instruct your sender(s) to use your new public key. However if your usage is widespread, getting that replacement key "out there" can be a challenge. In fact, GPG includes an entire infrastructure around trust, key validation, key revocation, key expiration and so on dedicated to maintaining the integrity of public and private keys.
+
+But it really all boils down to: key your private key secure.
+
+In this scenario, I've glossed over many of the aspects of public/private key security in order to keep the instructions simple.
+
+I've also glossed over many of the capabilities of this infrastructure, perhaps the most notable is "signing". Signing allows me to "sign" data using my (closely guarded) private key in a way that can then be validated by anyone using my public key. Validation proves that a) I, as sole holder of the private key, sent it, and b) the contents of the message was not altered. Both very powerful concepts that are missing from the basic email structure.
+
+If security, encryption and validation are important concepts that you see a large need for, it would make sense to investigate the alternatives and add-ons available for your email clients and infrastructure, paying particular attention to cross-client compatability.
+
+But in the mean time, the approach above can serve you well.
+
+Article C2585 - March 8, 2006 « »
+
+Share this article with your friends:
+Share this article on Facebook  Tweet this article  Email a link to this article    
+Leo Leo A. Notenboom has been playing with computers since he was required to take a programming class in 1976. An 18 year career as a programmer at Microsoft soon followed. After "retiring" in 2001, Leo started Ask Leo! in 2003 as a place for answers to common computer and technical questions. More about Leo.
+Not what you needed?
+
+You may also be interested in:
+
+ FREE Newsletter!
+
+Join over 90,000 folks just like you and get the FREE weekly Ask Leo! Newsletter
+Use your computer more safely and more effectively - get the latest tips, tricks and answers to common problems in your inbox every week.
+Your Email:
+
+I respect your privacy. I will NEVER sell, rent or share your email address. That's more than a policy, it's my personal guarantee!
+
+My Privacy Pledge.
+
+Find out more
+(including exclusive subscriber-only bonuses)
+
+    Just how secure is email, anyway? Email is ubiquitous and convenient, yet surprisingly not very secure. I'll look at why that is and when you should worry.
+
+    How do I create and use Public Keys with SSH? SSH and SFTP Public Key Authentication requires that you create a public/private key pair. We'll look at how to create, and then use, those keys.
+
+    Is an https connection really all that safe? https is an important part of keeping your data safe, but it's only a part. It's important to understand what it means and what it doesn't mean.
+
+45 Comments
+Ronny
+March 8, 2006 1:33 PM
+
+You can avoid all this by putting the information in a zip file that is compressed with a password. It's less secure than the above but usually good enough. You can also put it in a Word document and save that with a password. This is less secure still but very easy.
+
+To get the password to your client, just use the phone.
+Leo
+March 8, 2006 1:36 PM
+
+Actually those are both *significantly* less secure. (Word in particular.)
+Rodney
+March 9, 2006 3:59 AM
+
+What about the encryption built inot Outlook Express under tools... options... security? Doesn't that work ok?
+
+What ever happened to PGP? I know it was bought, discontinued then restarted. Has it been discontinued again?
+
+Rodney
+Leo A. Notenboom
+March 9, 2006 9:05 AM
+
+Outlook and Outlook Express's security works fine, I'm sure. But it's not compatible, that I'm aware of, with other mailers or with GPP/PGP. The Outlook/OE solution has you purchasing digital certificates from Verisign, and using those to encrypt and/or sign your email.
+
+PGP still exists, but they're also not free any more. GPG is a compatible, free, opensource alternative.
+John
+March 9, 2006 9:33 AM
+
+Just a typo...
+"meaning that an authorized person gets a copy,"
+
+I presume that you mean an UNauthorized person.
+---
+and a comment...
+
+At the end of the day, your client could toss the data on a CD and hand it to the nice FedEx/UPS/Mail person.
+
+Sensitive data is only as secret as the trust you put in the transfer medium.
+Leo A. Notenboom
+March 9, 2006 10:15 AM
+
+Thanks on the typo. Fixed.
+
+And yes, you raise a recurring theme that applies to any and all computers and data: if it's not physically serure - it's not secure.
+Phil
+July 31, 2006 9:11 AM
+
+I don't know why, but I couldn't get Command Prompt to recognise 'gpg --gen-key'. I went to their sight(GnuPG) and non of the links that it looked like I needed to use seemed to work. I tryed for a long time too. Whats Up? I am new but I'm not totally brain dead... I hope. What am I doing wrong? I have been trying to work out this mail thing for way to long of a time. Hours of wasted time just going around in circles. Big Brother won't let us have private mail anymore? I am getting real bugged at Big Brother!
+Leo A. Notenboom
+July 31, 2006 4:46 PM
+
+You need to make sure that the directory that GPG.EXE is installed in is in your PATH, or if you don't know what that is, make sure that you CD (Change Directoru) to that directory. For example:
+
+CD "\program files\gnupg"
+
+if that's where the program is located, and then the gpg command should work from there.
+Christer
+October 3, 2006 6:51 AM
+
+You wrote:
+Note the dire warning about making sure you know who's key you're dealing with. There are ways to confirm and avoid this message, but for now to keep things simple, we'll simply note that the Primary Key fingerprint listed here matches the fingerprint that was listed when you created the key, and answer "Yes".
+
+How do I avoid the message?
+Rodrigo
+November 10, 2006 9:06 AM
+
+Hi, can I avoid the message "It is NOT certain that the key belongs to the person named in the user ID. If you *really* know what you are doing, you may answer the next question with yes.
+" on encrypt?
+
+thanks
+Paul Tregunno
+February 9, 2007 8:35 AM
+
+You mentioned below that there are ways to avoid the question "use this key anyway?" when encrypting. I would appreciate further information on how:
+
+Now they're ready to encrypt. That looks like this (encrypting the example file "example.xls"):
+
+c:\>gpg -a --encrypt -r example@ask-leo.com example.xls
+gpg: 1B917E56: There is no assurance this key belongs to the named user
+
+pub 2048g/1B917E56 2006-03-08 Leo A. Notenboom
+Primary key fingerprint: 8A4F 770F D037 D414 F4E6 B95C 6E89 72A3 874A 3EC1
+Subkey fingerprint: 215A 55C8 C88A 2587 4E64 995C 5EFC 7E3F 1B91 7E56
+
+It is NOT certain that the key belongs to the person named
+in the user ID. If you *really* know what you are doing,
+you may answer the next question with yes.
+
+Use this key anyway? (y/N) y
+Note the dire warning about making sure you know who's key you're dealing with. There are ways to confirm and avoid this message, but for now to keep things simple, we'll simply note that the Primary Key fingerprint listed here matches the fingerprint that was listed when you created the key, and answer "Yes".
+Leo Notenboom
+February 9, 2007 7:17 PM
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+It's been a while since I did it, but if I recall correctly it involves:
+
+- - making sure that you actually have the proper key
+
+- - signing that key youself
+
+Signing it essentially tells gpg that "yes, I've verified that they key
+belongs to who it claims to".
+
+Leo
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (MingW32)
+
+iD8DBQFFzTkiCMEe9B/8oqERAqWfAJ9AEbgr3OvW6Xt0aXGavJCf0ydT1QCfRS0/
+EnYiNJC91aX5gHNlCBx01RI=
+=oHeH
+-----END PGP SIGNATURE-----
+Mark
+February 15, 2007 2:07 AM
+
+I've used GPG for a while to secure important data stored on my PC. I haven't really used it in earnest for email encryption, though. The main reason is that it's a bit too cumbersome for most people to use. I'm now advocating a product called Private Post (http://www.privatepost.com/) to my friends and customers. It is fairly easy to install, bolts into Outlook and Outlook Express and provides an Explorer extended menu for encrypting files etc. locally as well as in emails.
+Matt
+March 22, 2007 6:46 AM
+
+This comment explains a way to avoid the message in the article stating "there is no assurance key belongs to the named user". Whether it is the "best" or even a good way is beyond my knowledge but I thought I would share what I have learned. As always with "all things secure", use at your liability!
+
+I was receiving this message too when trying to use an imported public key from PGP (commercial "equivalent" of GnuPGP) on my GnuPGP machine. I ended up generating a key on GnuPGP and then "signing" the PGP key with my generated (and trusted) GnuPGP key with the following command:
+
+gpg --sign-key "key name"
+
+It prompted me with the following message:
+
+"Are you sure that you want to sign this key with your key "my GnuPGP key name"
+
+Really sign? (y/N)"
+
+To which I responded "y".
+
+To which it required the passphrase to unlock the secret key for my GnuPGP key.
+
+To which I supplied.
+
+I then ran the command to update my trust database:
+
+gpg --update-trustdb
+
+To which it found the PGP key (signed) but with no defined "trust" value. So it gave me the following:
+
+"Please decide how far you trust this user to correctly verify other users' keys (by looking at passports, checking fingerprints from different sources, etc.)
+
+1 = I don't know or won't say
+2 = I do NOT trust
+3 = I trust marginally
+4 = I trust fully
+s = skip this key
+q = quit"
+
+To which I answered (4) and was no longer prompted with the statement "...there is no assurance key belongs to the named user..."
+
+Hope this helps others. If there's a way to do this without generating a local private key and using that to sign the public key and someone knows, please let me/us know.
+
+Thanks.
+Ingo
+April 4, 2007 1:17 AM
+
+You can avoid the assurance or trust problem by adding " --always-trust" to the command when encrypting... worked for me anyway ;)
+RAGHUMADHULLA
+August 16, 2007 6:16 AM
+
+A LOT OF THANKS.REALLY IT IS EASILY UNDERSTANDABLE MANNER. IAM VERY PROUD TO VISIT YOUR SITE AND ALSO WILL BE LEARN MORE THINGS FROM YOUR SITE.VERRRRRRRRRY THANKS.
+Bob Janacek
+February 26, 2008 12:18 PM
+
+Or you can just use an service like http://www.certifiedmail.com and do away with key mumbo jumbo altogether.
+
+And if you happen to have an X.509 certificate, you can still sign the message and send it to the recipient securely. The signing cert will be displayed to the recipient for non-repudiation, but the encryption happens without needing each recipient to have their own keys.
+Clint
+July 23, 2008 8:39 AM
+
+In the above section Encrypting Data you mentioned "There are ways to confirm and avoid this message: Use this key anyway? (y/N) y� Can you please provide more details?
+
+Thanks,
+Clint
+It's been a while, but I believe the approach is that after you import the public key you sign it to confirm that it is what it claims to be. Check the GPG/PGP docs for more on this.
+
+-Leo
+
+Dave
+September 23, 2008 6:56 PM
+
+I would like to be able to use this program to send emails to and from my PDA. Is this possible? If so, can you please walk me through how to set this up. (I know nothing about programming).
+
+Thank You,
+Dave
+Sam
+November 7, 2008 12:03 PM
+
+I like the info of your website but I am trying to eliminate the prompt but when i type gpg --sign-key "name" it gave me this error
+pub 1024D/41AFECB4 created: 2004-01-29 expires: never usage: SCA
+trust: full validity: unknown
+sub 1024g/693C2BF1 created: 2004-01-29 expires: never usage: E
+[ unknown] (1). "keyname"
+
+gpg: no default secret key: secret key not available
+
+Key not changed so no update needed.
+
+please help.
+Sally O'Boyle
+March 27, 2009 9:49 AM
+
+Thank you for your great post. Very informative. Unfortunately, GNU is impossible to use unless you can translate the install instructions. I can't. Not even close... Any other suggestions? I know about PGP and will end up buying that if there are no other ideas. Thanks!
+Ed Gerck
+November 15, 2009 12:04 AM
+
+To send encrypted email with delivery notification and self-destruct, without requiring the recipient to setup or register, try free ZSentry Mail Basic at http://emailsecurity.zsentry.com/
+(zsentry can also send using desktop email with SSL SMTP)
+Alexa Gerber
+November 25, 2009 5:40 AM
+
+I also have a encryption product. It basically just a software item. When you install it on your outlook there is a send secure button. You press that, a link is mailed to the recipient. A password is sms through to him and the recipient can then access the information. An email is then send through to the sender saying the package was delivered successfully. When the email is opened. The contact can either save the document, or as soon as it is closed it will be deleted immediately. You can download a 30 trail on www.securenvoy.co.za.
+InstantCrypt
+December 30, 2009 2:25 PM
+
+Thanks Leo!
+
+InstantCrypt, a free program that uses the above-described GnuPG (also called GPG) can be downloaded here:
+
+www.instantcrypt.com
+
+InstantCrypt is for entry-level and occasional users and lets you encrypt and decrypt e-mail without you having to go through the technicalities of GnuPG described above. You, and the person that you correspond with need InstantCrypt or a similar encryption program (such as PGP, GPG, or other programs using the OpenPGP standard). InstantCrypt runs on Windows only.
+ahmad
+February 2, 2010 1:11 PM
+
+to encrypt email visite
+this site --- free
+
+www.newatsys.com
+opolis
+April 30, 2010 5:01 AM
+
+well, with opolis secure mail http://www.opolis.eu - a free service - messages are instantly encrypted and all required steps fully integrated. and, the sender decides what the recipient of a message is allowed to do with it ...
+Franco Russo
+May 18, 2010 7:29 PM
+
+077 emails, www.007emails.com offer a free encrypted message service with double encription, once the final recipient has read the Emails that you sent, that the Emails will self-destruct completely in less than seven seconds.
+John BM
+May 22, 2010 2:02 AM
+
+Check this link
+
+http://www.fastpitchnetworking.com/pressrelease.cfm?PRID=41397
+
+India based software company offers a dynamic encrypted emails solution
+Ram Narayan
+June 20, 2010 7:24 AM
+
+Use this portable PGP encryption based email client from Securebox.
+
+http://www.securebox.co.nr
+tomas
+July 11, 2010 6:38 AM
+
+I found a solution called WitchFile ( www.witchfile.com)
+
+how about WitchFile ?
+Angus Bradley
+August 4, 2010 6:58 AM
+
+This is great, but PGP is a bit too complex for many - which is why we created http://safedrop.com - secure messages that self destruct. no techie knowledge required - and the recipient can *reply* securely as well!
+sahadev
+August 24, 2010 10:43 PM
+
+i can't understand about enscrypting and descrypting tha data so can't itbe written in simpler form
+Manoj Patil
+September 21, 2010 2:45 PM
+
+Excellent answer for GPG encryption warning message User this Key anyway y/N : : There is no assurance this key belongs to the named user
+It is NOT certain that the key belongs to the person named in the user ID. If you *really* know what you are doing,
+> you may answer the next question with yes.
+
+> Use this key anyway? (y/N) y
+
+I wanted to Run this script -silently without user interaction. your SOLUTION
+
+gpg --always-trust --encrypt --recipient (receipient@yahoo.com) testfile.txt
+
+
+did not ask for Y/n warning messge. Many many many Thanks , I was looking for simple solution.
+where I am not creating any GPG keys , I just want to use key from other party and send the file encrypting their key in Nightly job.
+This solution helped me , I was searching a lot for this .
+Rick
+October 21, 2010 6:40 AM
+
+TL;DR! Who is ever going to use this feature if a free version is not easily available(read above, TL;DR, way too complex for the peops who send 99,999% of all e-mails) or you have to pay for it(Ha. Haha. Hahaha). Secure e-mail is a stillborn.
+CompletelyPrivateFiles
+October 27, 2010 8:45 AM
+
+Public/private key encryption is very strong security, but requires a lot of steps, not to mention key management. I think that's one of the reasons it's found little adoption by the masses.
+
+So many people try 'security through obscurity' and just send their sensitive data via email, hoping that no one's looking.
+
+Our company, CompletelyPrivateFiles, tries to strike a balance somewhere in between security and difficulty. We have a free browser-side email encryption solution called PointMX that ensures that your message is encrypted with 256-bit AES encryption before it leaves your computer. It's built with JavaScript so there's no Flash/Java dependency. It's best suited for smaller messages.
+
+https://www.completelyprivatefiles.com/services/smx/
+
+How it works:
+
+You enter a secret passphrase that you will share somehow with the recipients of the message. A strong key is derived from the weaker passphrase (although you could use a 'strong random' passphrase if you wanted).
+
+When you click Send your browser encrypts the message before leaving your computer and we email it for you.
+
+We have no knowledge of your passphrase or key, and your message is encrypted as it travels the Internet's email servers.
+
+The recipient(s) receive an email in their Inbox, and click to view the message. They must provide the passphrase in order for their browser to decrypt the message.
+Andy
+December 16, 2010 1:19 PM
+
+FYI there are services out the that do public private key encryption for you encryptshield.com is a free email encryption service for doing just what your talking about
+Selvan Poothamby
+March 1, 2011 7:49 AM
+
+Most of my recipients can't do this.
+
+So I wonder if it's possible to act as the intended recipient using a bogus but legit e-mail account and generate the public/private key pair.
+
+Then send the private key to them using and I keep and use their public key to send e-mail with attachments totaling less than 200 KB using WLM.
+
+Is it doable?
+You could do it and even use their email address instead of a bogus one. They would have to trust you as you would be able to open their encrypted emails. It's best to give them the key personally and not by email as there's a risk of key interception on the internet. If you aren't able to hand it to them you could mail them a cd, usb stick or a diskette.
+Leo
+04-Mar-2011
+
+Selvan
+March 10, 2011 2:13 PM
+
+Is it possible to integrate this into Windows Live Mail?
+Not that I'm aware of.
+Leo
+11-Mar-2011
+
+Jon Lybrook
+May 14, 2011 7:48 PM
+
+Hi Leo,
+
+Good overview about secure email, but you make no mention about strictly web-based services. Sniffing email may be uncommon, but you can bet Google is scanning and storing any data about you via Gmail if it helps beef up their giant marketing database about all of us. Communicating through an encrypted method that is not free is about the only way to ensure privacy. Word Secure (https://wordsecure.com) or similar services are essentially web-based apps that are secure on the sender and recipient end. GPG and PGP require 3rd party tools to be installed and configured on both the sender and recipient's end and are impractical, where as web-based solutions are all done over SSL, like with banking and ecommerce software. Unlike Gmail where it may be secure on one side but not both, web based encrypted solutions provide point-to-point protection.
+
+Yes, there is a nominal cost to subscribe to these services Rick, but for people who value security it's a bargain compared to blowing your weekend figuring out convoluted 3rd party tools and convincing your clients and customers to also blow their weekends installing the same.
+
+Jon Lybrook
+MM
+July 12, 2011 6:05 AM
+
+now GPG support is available in the new mozilla thunder bird.so I think there is no need to use command prompt.am I correct??..
+
+
+
+The Enigmail extension has been available for a while and does make it easier, but only if you use Thunderbird.
+Leo
+14-Jul-2011
+
+Gina
+September 15, 2011 5:55 PM
+
+Hi Leo,
+We are all aware of the risks involved in signing up for an email service provider and sending and receiving messages through these providers and making sure it is secure is of course of utmost importance to us, so we would choose to send personal and sensitive information via the most secure website and that would also mean paying for this service. Well, all the complexity of this should really be worth it..but what can you say about encrypt.me which offers us a very affordable cost (it's free at the moment which is great) and very simple to use! I think its closed loop system is safe enough to send very sensitive information without much hassle in signing up!
+its definitely worth checking out!
+Anjan
+December 8, 2011 3:27 PM
+
+I think it is very very absolutely important to protect ones email id and password. When one sends email from public hotspot, if the id and password are snatched as they make their way from ones laptop to the Access Point then the person loses his email forever. Happily Yahoo webMail encrypts id/passwd via SSL. If one is concerned about privacy of the message, he/she can use file attachment with "very strong" password. Ofcourse, you need a way to let the recipient know the password, and ofcourse you would not use the same email to give it to him. However, I am very happy to find that Gmail actualy use SSL encryption for password and message body. No other free webmail service does this. This is Grrreeeaaaaat! I just thought I would share this with you.
+Chris
+February 5, 2012 11:10 PM
+
+I'm looking for a means where I can encrypt an email message, send it to my son and he doesn't need to have the software installed on his computer to read it. He would only need to enter a password. Will something like this work? TIA
+Mark J
+February 6, 2012 2:09 AM
+
+@Chris
+You can use a program like 7zip to create an encrypted self extracting zip file. This is a zip file with a .exe extension which contains the software internally to unzip and decrypt itself without external software.
+7-zip file archiving utility
+Mick Gill
+February 28, 2012 1:06 PM
+
+I came across this Service https://oneshar.es/ It allows you to send secure textual information as a Self Destructing Link. As soon as its read its deleted.
+
+•
+
+Comments on this entry are closed.
+
+If you have a question, start by using the search box up at the top of the page - there's a very good chance that your question has already been answered on Ask Leo!.
+
+If you don't find your answer, head out to http://askleo.com/ask to ask your question.
+
+Question? Ask Leo!
+The Tip Jar: Buy Leo a Latte!
+
+Categories | Full Archive
+By Date | Business Card | About
+
+Advertisements do not imply my endorsement of any product or service.
+
+Copyright © 2003-2015 Puget Sound Software, LLC and Leo A. Notenboom
+Ask Leo! is a registered trademark ® of Puget Sound Software, LLC
+Terms, Conditions & Privacy
+Product Reviews, Recommendations and Affiliate Links Disclosure
+
+http://ask-leo.com/how_do_i_send_encrypted_email.html

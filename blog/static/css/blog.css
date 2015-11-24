@@ -1,6 +1,13 @@
 html, body, #k-container { height: 100%; }
 body > #k-container { height: auto; min-height: 100%; }
 
+div.jumbotron {
+    background-image: url(../images/onetimepad-17pct-opacity.png);
+    background-color: #EEE;
+/*    background-size: contain;
+    background-position: bottom;  */
+/*    opacity: 0.4;  */
+}
 
 .btn-primary > span.glyphicon {
     color: white;

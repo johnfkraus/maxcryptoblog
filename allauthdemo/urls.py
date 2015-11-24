@@ -28,7 +28,15 @@ urlpatterns = patterns(
     url(r'^member/action$', blog.views.post_list, name='user_action'),  # blog/post_list'),
     url(r'^admin/', include(admin.site.urls)),
 
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.MEDIA_URL:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 """
 # E-mail

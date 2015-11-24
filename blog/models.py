@@ -70,8 +70,8 @@ class Post(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Post._meta.fields]
 
-    def content2(self):
-        content_string = self.title + '\n'
+    def content_only(self):
+        content_string = ''
         if self.is_encrypted:
             content_string += self.ciphertext
         else:
@@ -79,7 +79,7 @@ class Post(models.Model):
         return content_string
 
     def set_content(self):
-        content_string = self.title + '\n'
+        content_string = ''
         if self.is_encrypted:
             content_string += self.ciphertext
         else:
@@ -88,7 +88,7 @@ class Post(models.Model):
         return content_string
 
     def get_content(self):
-        content_string = self.title + '\n'
+        content_string = ''
         if self.is_encrypted:
             content_string += self.ciphertext
         else:
@@ -130,7 +130,7 @@ class EmailMessage(models.Model):
     subject = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
-        summary = 'date = ' + str(self.created_date) + '; destin_email = ' + self.destin_email + '; message_content = ' + self.message_content + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '; age = ' + str(timezone.now() - self.created_date) + '\n'
+        summary = 'date = ' + str(self.created_date) + '; destin_email = ' + self.destin_email + '; message_content (truncated) = ' + self.message_content[0:100] + '; sender = ' + self.sender.name + '; post  = ' + self.post.title + '; age = ' + str(timezone.now() - self.created_date) + '\n'
         return summary
 
     def short_text(self):
