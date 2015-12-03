@@ -1,7 +1,7 @@
 doc
 doc/*
 *.sublime-workspace
-*.sublime-project
+*/*secret.py
 */settings_email.py
 */settings_cryptoblog.py
 */settings_secret.py
@@ -40,3 +40,6 @@ postgres-cheatsheet.md
 *.*~
 */*.*~
 Rakefile
+
+*.html.txt
+*/*.html.txt
