@@ -48,5 +48,6 @@ except ImportError:
 
 try:
     print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'DEBUG =', DEBUG)
+    print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'USER_EMAIL_ENABLED =', USER_EMAIL_ENABLED)
 except NameError:
     print(allauthdemo.utils.module_path(), 'line', allauthdemo.utils.lineno(), 'DEBUG is not defined')

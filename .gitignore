@@ -12,6 +12,7 @@ __pycache__
 /static
 .DS_Store
 local_settings.py
+*secret.txt
 notes.secret.txt
 *.hide.txt
 *.secret.txt

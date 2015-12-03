@@ -12,11 +12,15 @@
         </p>
         <!--user: {{ user }}
         post.author: {{ post.author }} -->
+
+
         {% if user.is_authenticated  %}
 
-        <a title="Email this post" class="btn btn-primary" href="{% url 'post_email' pk=post.pk %}">
-            <span class="glyphicon glyphicon-send"></span>Email
-        </a>
+            {% if user_email_enabled  %}
+            <a title="Email this post" class="btn btn-primary" href="{% url 'post_email' pk=post.pk %}">
+                <span class="glyphicon glyphicon-send"></span>Email
+            </a>
+            {% endif %}
 
             {% ifequal user post.author %}
                 <a title="Unpublished this published post" class="btn btn-primary" href="{% url 'blog.views.post_unpublish' pk=post.pk %}">Unpublish</a>
@@ -65,11 +69,7 @@
             <i class="fa fa-key fa-lg"></i>&nbsp;Decrypt 
         </a>
         {% endif %} 
-        <!--
-        <a title="Email this post" class="btn btn-primary" href="{   % url 'post_email' pk=post.pk %  }">
-            <span class="glyphicon glyphicon-send"></span>Email
-        </a>
-    -->
+
     {% endifequal %}
 
     <h2 class="blog-post-title">{{ post.title }}</h2>

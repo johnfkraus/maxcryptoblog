@@ -25,41 +25,44 @@
     </p>
 
     <h3>
-        Planned features
+        Additional features that might possible be added or enabled
     </h3>
     <p>
-        For users who, against our recommendation, recklessly opt to store blog post encryption passwords on the system, such password should at least be stored in encrypted form on our database.
+        <ul>
+            <li>
+                For users who, against our recommendation, recklessly opt to store blog post encryption passwords on the system, such passwords should at least be stored in encrypted form on our database.
+            </li>
+            <li>
+                User One can allow authenticated User Two to read her encrypted posts User One you gives User Two the blog post password without User One having to let User Two log in as User One with User One's credentials.
+            </li>
+            <li>
+                Users can email their encrypted posts using the Max Cryptoblog email facility.
+            </li>
+            <li>
+                Users can can message other users.
+            </li>
+            <li>
+                Allow unregistered recipients of encrypted emailed posts to decrypt encrypted posts using a password provided by the sender.
+            </li>
+            <li>
+                Users can uploaded and encrypted documents and images, including documents in PDF format.
+            </li>
+            <li>
+                Emailed posts can be in the form of email attachments.
+            </li>
+            <li>
+                Emailing from the site should be subject to quantity limits.  Limit the number of emails users can send from the app, with stricter limitations on non-paying users.
+            </li>
+            <li>
+                Limit the length of emailed posts.  Does anyone really need to email the entire text of Henry James' The Ambassadors?
+            </li>
+            <li>
+                Add gratuitous features just for fun.  For example, provide readability index measures for (unencrypted) blog post texts.  Other possibilities: spelling and grammar checking.  Automatic ipsum generation.  Check for trigger words often found in badly-composed writing.
+            </li>
+        </ul>
     </p>
-    <p>
-        You can allow other authenticated users to read your encrypted posts if you give them the password.
-    </p>
-    <p>
-        You can email your encrypted posts.
-    </p>
-    <p>
-        You can message other users.
-    </p>
-    <p>
-        Allow unregistered recipients of encrypted emailed posts to decrypt them.
-    </p>
-    <p>
 
-        Users can uploaded and encrypted documents and images, including PDFs.
-    </p>
     <p>
-
-        Emailed posts can be in the form of email attachments.
-    </p>
-    <p>
-
-        Limit number of emails sent from the app by each free user.
-    </p>
-    <p>
-
-        Limit the length of emailed posts.  Does anyone really need to email all of Henry James' The Ambassadors?
-    </p>
-    <p>
-
         <h3>
             Cryptograpy
         </h3>
@@ -84,18 +87,18 @@
         </p>
         <h3 style="color: red;">Caution</h3>
         <p>
-            This instance of {{ APP_TITLE }} is in the early (alpha) development stage and is virtually untested.  {{ APP_TITLE }} is not ready for production usage.  Use {{ APP_TITLE }} for experiments and entertainment only.  
+            This instance of {{ APP_TITLE }} is in the early (alpha) development stage and is virtually untested.  {{ APP_TITLE }} is not ready for production usage.  Use {{ APP_TITLE }} for experimentation and entertainment only.  
              At this time assurance of long-term maintenance of user accounts or content is impossible.  The security and privacy of any information stored on the current version of {{ APP_TITLE }} is uncertain.  Account passwords are hashed, of course.  
 
-            Computer system administrators/developers and probably some hackers are capable of viewing your information.  The system is designed such that (1) passwords that you use to encrypt your content are not stored on the system unless you choose to save them (against our recommendation); and (2) when you encrypt your content, the plaintext is discarded.  The integrity of the system cannot be guaranteed, however.  Your content is transmitted over the public Internet with the associated risk of interception.  Employ additional layers of security <a href="https://www.torproject.org" target="_blank"> (example)</a>.  {{ APP_TITLE }} may be unsuitable for sensitive content.  Trust no one.  Enjoy!
+            Computer system administrators/developers and probably some hackers are capable of viewing your information.  The system is designed such that (1) passwords that you use to encrypt your content are not stored on the system unless you choose, against our recommendation, to save such passwords; and (2) when you encrypt your content, the plaintext is discarded.  The integrity of the system cannot be guaranteed, however.  Your content is transmitted over the public Internet with the associated risk of interception.  Your plaintext may be transmitted over the public Internet in unencrypted form (SSL/TLS may not be enabled).  Employ additional layers of security as appropriate <a href="https://www.torproject.org" target="_blank"> (example)</a>.  {{ APP_TITLE }} in its current state may be unsuitable for sensitive content.  Trust no one.  Enjoy!
         </p>
-        <!--
-        <h3 style="color: red;">Crippled Web Browsers</h3>
+        <p>
+        <h3 style="color: red;">Recommended web browsers</h3>
         <h4>Where are the magical icons?</h4>
         <p>
-            If you are using the consistently dysfunctional Internet Explorer web browser, too bad for you.  IE permits further degradation of the user experience by allowing the download of fonts to be blocked.  These fonts are required for the site to function and also make the web site look pretty.  If you are browing on your work computer and your workplace has further broken your lame IE browser by blocking font download, use Google Chrome or Firefox, and never use IE again.
+            This website works best with Google Chrome or Mozilla Firefox.  Internet Explorer?  Not so much.  Browsing at the office?  Your organization may have enabled browser settings that degrade the user experience.
         </p>
-    -->
+</p>
     <hr>
     <p>
         {{ APP_TITLE}} is a Thing Made by <a href="mailto:johnkraus3@gmail.com" target="_blank"> John Kraus</a>
