@@ -1,8 +1,13 @@
 # Max Cryptoblog
 
-Max Cryptoblog is here:  https://johnfkraus.pythonanywhere.com
+A blog website that lets you publish your blog posts in cyphertext.
 
-Also: http://johnfkraus.github.io/maxcryptoblog/
+<object data="max_cryptoblog_screenshots 6 pages ocr.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="max_cryptoblog_screenshots 6 pages ocr.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="max_cryptoblog_screenshots 6 pages ocr.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 
 
 TODO:
