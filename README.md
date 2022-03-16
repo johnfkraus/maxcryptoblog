@@ -7,6 +7,9 @@ I built this app while learning Python/Django.
 ![maxcryptoblog screenshot](maxcryptoblog.png "Maxcryptoblog login screen")
 
 
+![maxcryptoblog sample blog post](maxcryptoblog_guest_vegas.png "Maxcryptoblog sample blog post")
+
+
 You can view a pdf file of website screenshots.
 
 <object data="max_cryptoblog_screenshots 6 pages ocr.pdf" type="application/pdf" width="700px" height="700px">
