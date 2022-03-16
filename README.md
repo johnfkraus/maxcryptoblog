@@ -4,6 +4,9 @@ A Python Django hobby application that lets you publish your web blog posts in c
 
 I built this app while learning Python/Django.
 
+![maxcryptoblog screenshot](maxcryptoblog.png "Maxcryptoblog login screen")
+
+
 You can view a pdf file of website screenshots.
 
 <object data="max_cryptoblog_screenshots 6 pages ocr.pdf" type="application/pdf" width="700px" height="700px">
