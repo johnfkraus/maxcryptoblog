@@ -1,6 +1,10 @@
 # Max Cryptoblog
 
-A blog website that lets you publish your blog posts in cyphertext.
+A Python Django hobby application that lets you publish your web blog posts in cyphertext so that no one can read them. ;-)
+
+I built this app while learning Python/Django.
+
+You can view a pdf file of website screenshots.
 
 <object data="max_cryptoblog_screenshots 6 pages ocr.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="max_cryptoblog_screenshots 6 pages ocr.pdf">
