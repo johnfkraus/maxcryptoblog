@@ -9,7 +9,6 @@ A blog website that lets you publish your blog posts in cyphertext.
 </object>
 
 
-
 TODO:
 
 Allow encrypted posts to be download and saved to a local file.  The local file can then be emailed by the user.  The email recipient could then upload the emailed file to the blog and decrypt it using a password.
