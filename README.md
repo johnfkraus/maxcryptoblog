@@ -7,6 +7,8 @@ I built this app while learning Python/Django.
 ![maxcryptoblog screenshot](maxcryptoblog.png "Maxcryptoblog login screen")
 
 
+What happened in Vegas?  It stays in Vegas unless you choose to share the password to your blog post about it.
+
 ![maxcryptoblog sample blog post](maxcryptoblog_guest_vegas.png "Maxcryptoblog sample blog post")
 
 
