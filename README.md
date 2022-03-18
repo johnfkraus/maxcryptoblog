@@ -2,7 +2,7 @@
 
 A Python Django hobby application that lets you publish your web blog posts in cyphertext so that no one can read them. ;-)
 
-I built this app while learning Python/Django.
+I built this app while learning Python/Django and experimenting with the Python cryptography library.
 
 ![maxcryptoblog screenshot](maxcryptoblog.png "Maxcryptoblog login screen")
 
