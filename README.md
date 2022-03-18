@@ -7,7 +7,7 @@ I built this app while learning Python/Django and experimenting with the Python 
 ![maxcryptoblog screenshot](maxcryptoblog.png "Maxcryptoblog login screen")
 
 
-What happened in Vegas?  It stays in Vegas unless you choose to share the password to your blog post about it.
+What happened in Vegas?  It stays in Vegas -- unless you choose to share the password to your blog post about it.
 
 ![maxcryptoblog sample blog post](maxcryptoblog_guest_vegas.png "Maxcryptoblog sample blog post")
 
@@ -23,16 +23,18 @@ You can view a pdf file of website screenshots.
 
 TODO:
 
-Allow encrypted posts to be download and saved to a local file.  The local file can then be emailed by the user.  The email recipient could then upload the emailed file to the blog and decrypt it using a password.
+Allow encrypted posts to be download and saved to a local file.  The local file can then be emailed by the user.  The email recipient could then upload the emailed file to the recipient's private space on this website, decrypt it using a password and read it privately.
 
 Allow use of PKI to encrypt messages between users (Bob and Alice, for example).
 
-Allow unregistered recipients of encrypted emailed posts to decrypt them.
+Allow users not registered on the website who are recipients of encrypted emailed posts to decrypt them.
 
-Users can uploaded and encrypted documents and images, including PDFs.
+Users can upload and encrypt documents and images, including PDFs.
 
-Notify administrator by email of new user registrations, conditions on the server, etc.
+Notify administrator by email of: new user registrations, server health, etc.
 
 Add full-text search with, say, the django-haystack text search engine.
+
+Enable/update TLS/SSL.
 
 Add cool background images, like a one-time pad image. # done
